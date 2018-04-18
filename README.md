@@ -1,6 +1,10 @@
 # react PC端开发基础脚手架
 - 环境：`react16.3+webpack4.6+antd3.4`
 - antd使用`babel-plugin-import`按需加载
+## 启动
+- git clone git@github.com:One-boy/react-starter-kit.git
+- npm install
+- npm start
 ## 安装
 - 版本
     - `node v8.6.0`
