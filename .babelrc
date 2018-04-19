@@ -1,14 +1,24 @@
 {
     "presets": [
-        ["env",{
-            "targets":{
-                "chrome":42
+        [
+            "env",
+            {
+                "targets": {
+                    "chrome": 42
+                }
             }
-        }],
+        ],
         "react",
         "stage-0"
     ],
     "plugins": [
-        ["import", { "libraryName": "antd", "style": true }]        
+        "transform-decorators-legacy",
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "style": true
+            }
+        ]
     ]
 }

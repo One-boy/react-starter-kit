@@ -4,7 +4,13 @@ import {
     Route,
     Link,
 } from 'react-router-dom'
+import TestStore from './testStore'
 
+import Connect from '../../components/store/connect'
+
+@Connect((store) => ({
+    config: store.config,
+}))
 export default class home extends Component {
 
     constructor(props) {
@@ -12,12 +18,20 @@ export default class home extends Component {
         this.state = {}
     }
 
+    updateStore = () => {
+        this.props.StoreHandle && this.props.StoreHandle.setStore('config', { name: `random${Date.now()}` })
+    }
     render() {
         return (
             <div className="nav-wrap">
                 <div className="img-wrap">
-                    <img src="resource/image/1.jpg" />
+                    组件一 Store=> {this.props.config.name}
+                    {/* <img src="resource/image/1.jpg" /> */}
+                    <div>
+                        <Button onClick={this.updateStore}>更新store</Button>
+                    </div>
                 </div>
+                <TestStore />
             </div>
         )
     }
