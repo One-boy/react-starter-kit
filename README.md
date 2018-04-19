@@ -26,8 +26,9 @@
     - npm install babel-preset-env --save-dev
     - npm install --save-dev babel-cli babel-preset-react
     - npm install babel-preset-stage-0 --save-dev
-- react和react-dom
+- react和react-dom和路由
     - npm install --save react react-dom
+    - npm install --save react-router-dom
 - antd
     - npm install --save antd
     - npm install --save-dev babel-plugin-import

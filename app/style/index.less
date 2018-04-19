@@ -1,7 +1,42 @@
 
 @font-size:16px;
+@border:1px solid #ccc;
+@header-height:64px;
 
-.home-page{
-    color: green;
-    font-size: @font-size;
+#root{
+    height: 100%;
+}
+.main-wrap{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .main-header{
+        height: @header-height;
+        border-bottom: @border;
+        line-height: @header-height;
+        text-align: center;
+    }
+    .main-body{
+        flex: auto;
+        display: flex;
+        .main-body-left{
+            width: 128px;
+            border-right: @border;
+            ul{
+                list-style: none;
+            }
+        }
+        .main-body-content{
+            flex: auto;
+            padding: 1em;
+        }
+    }
+}
+
+.login-wrap{
+    text-align: center;
+}
+
+.nofound-wrap{
+    text-align: center;
 }

@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './pages/home'
-import './style/index.less'
-import {LocaleProvider}from 'antd'
+import App from './app'
+import { LocaleProvider } from 'antd'
 import zh_CN from 'antd/lib/locale-provider/zh_CN'
-
+import {
+  HashRouter as Router
+} from 'react-router-dom'
+import './style/index.js'
 
 ReactDOM.render(
-  <LocaleProvider locale={zh_CN}>
-    <Home/>
-  </LocaleProvider>
- ,
+  <Router>
+    <LocaleProvider locale={zh_CN}>
+      <App />
+    </LocaleProvider>
+  </Router>
+  ,
   document.getElementById('root')
 );
