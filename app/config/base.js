@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'production') { // 生产环境用不同的接口�
 
 const prefix = global.linkUrl
 const suffix = ''
-const timeout = 3000
+const timeout = 5000
 
 export {
     prefix,

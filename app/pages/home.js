@@ -29,22 +29,23 @@ export default class home extends Component {
         }
         this.setState({
             loading: true,
-        })
-        const cancel = httpLogin(reqData, (res) => {
-            this.setState({
-                text: res.data.token,
-                loading: false,
+        });
+        [1, 2, 3].forEach(item => {
+            const cancel = httpLogin(reqData, (res) => {
+                this.setState({
+                    text: res.data.token,
+                    loading: false,
+                })
+            }, (err) => {
+                this.setState({
+                    loading: false,
+                })
+                console.log(err.msg || err.message)
             })
-        }, (err) => {
-            this.setState({
-                loading: false,
-            })
-            console.log(err.msg || err.message)
+            setTimeout(() => {
+                cancel && cancel()
+            }, item * 1000)
         })
-
-        // setTimeout(() => {
-        //     cancel && cancel()
-        // }, 3000)
     }
     render() {
         return (

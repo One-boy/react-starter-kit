@@ -98,7 +98,6 @@ const axiosPost = (url, reqData, resolve, reject) => {
   return source.cancel
 }
 
-
 const createHttpPost = (url, target) => {
   let newUrl
   if (target) {
