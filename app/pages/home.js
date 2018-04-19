@@ -1,36 +1,58 @@
-import React,{Component} from 'react'
-import {Button,Modal} from 'antd'
+import React, { Component } from 'react'
+import { Button, Modal, message } from 'antd'
+import { httpLogin } from '../api/login'
 
-export default class home extends Component{
 
-    constructor(props){
+export default class home extends Component {
+
+    constructor(props) {
         super(props)
-        this.state={
-            text:123,
+        this.state = {
+            text: 123,
+            loading: false,
         }
     }
 
-    click=()=>{
+    click = () => {
         Modal.confirm({
-            title:'确定',
-            onOk:()=>{
-                this.setState({
-                    text:'ok'
-                })
+            title: '确定',
+            onOk: () => {
+                this.login()
             }
-        })
-        this.setState({
-            text:456
         })
     }
 
-    render(){
+    login = () => {
+        const reqData = {
+            userName: '1233',
+            passwd: '12'
+        }
+        this.setState({
+            loading: true,
+        })
+        const cancel = httpLogin(reqData, (res) => {
+            this.setState({
+                text: res.data.token,
+                loading: false,
+            })
+        }, (err) => {
+            this.setState({
+                loading: false,
+            })
+            console.log(err.msg || err.message)
+        })
+
+        // setTimeout(() => {
+        //     cancel && cancel()
+        // }, 3000)
+    }
+    render() {
         return (
             <div>
-            <h1 className="home-page">Hello, world!</h1>
-            <p>{this.state.text}</p>
-            <Button onClick={this.click}>按钮</Button>
-          </div>
+                <h1 className="home-page" > Hello, world ! </h1>
+                <p>{this.state.text}</p>
+                <Button loading={this.state.loading} onClick={this.click} > 请求数据 </Button>
+            </div>
         )
     }
 }

@@ -1,15 +1,19 @@
-
+/**
+ * 基础 配置
+ */
 
 // 本地开发打开的路径以及端口
-global.linkUrl = 'http://localhost:9999';
+global.linkUrl = 'http://127.0.0.1:3000/mock/11/kit';
 if (process.env.NODE_ENV === 'production') { // 生产环境用不同的接口地址
-    global.linkUrl = 'http://localhost:9999';
+    global.linkUrl = 'http://127.0.0.1:3000/mock/11/kit';
 }
 
-const prefix = global.gconfig.linkUrl
+const prefix = global.linkUrl
 const suffix = ''
-const timeout = 6000
+const timeout = 3000
 
 export {
-    prefix, suffix, timeout,    
+    prefix,
+    suffix,
+    timeout,
 }

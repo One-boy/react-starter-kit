@@ -1,14 +1,24 @@
 import axios from 'axios'
-import { prefix, suffix, timeout } from '../config/base'
+import {
+  message
+} from 'antd'
+import {
+  prefix,
+  suffix,
+  timeout
+} from '../config/base'
+import { returnStatus } from '../config/code'
 
 // axios配置
 const axiosBaseConfig = {
   // baseURL: prefix,
   timeout: timeout,
-  headers: { 'Content-Type': 'text/plain' },
+  headers: {
+    'Content-Type': 'text/plain'
+  },
   method: 'post',
   // 跨域请求，是否带上认证信息
-  withCredentials: true, // default
+  withCredentials: false, // default
   // http返回的数据类型
   // 默认是json，可选'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
   responseType: 'json', // default
@@ -50,33 +60,56 @@ axiosInstance.interceptors.request.use(req => req, error =>
 axiosInstance.interceptors.response.use(resp => resp, (error) => {
   // 当返回错误时
   if (axios.isCancel(error)) {
-    return Promise.reject(new Error('请求被取消'))
+    throw ({ message: "请求被取消" })
   }
   if ('code' in error && error.code === 'ECONNABORTED') {
-    return Promise.reject(new Error('请求超时'))
+    throw ({ message: "请求超时" })
   }
   return Promise.reject(error)
 })
 
-function axiosPost(url, reqData, target, handleCancel) {
+const axiosPost = (url, reqData, resolve, reject) => {
+  const CancelToken = axios.CancelToken;
+  const source = CancelToken.source();
+  axiosInstance.post(url, reqData, {
+    cancelToken: source.token,
+  })
+    .then((resp) => resp.data)
+    .then(
+      resp => {
+        switch (resp.status) {
+          case returnStatus.NORMAL:
+            // 正常数据
+            resolve && resolve(resp)
+            break
+          case returnStatus.NOT_LOGIN:
+            //  退出登录
+            sessionStorage.clear()
+            // to login
+            break
+          default:
+            reject ? reject(resp) : message.error(resp.msg)
+            break
+        }
+      }
+    ).catch(err => {
+      reject ? reject(err) : message.error(err.message || '未知错误')
+    })
+  return source.cancel
+}
+
+
+const createHttpPost = (url, target) => {
   let newUrl
   if (target) {
     newUrl = `${target}${url}${suffix}`
   } else {
     newUrl = `${prefix}${url}${suffix}`
   }
-  return axiosInstance.post(newUrl, reqData, {
-    cancelToken: handleCancel ? handleCancel.token : undefined,
-  })
+  return (reqData, resolve, reject) => axiosPost(newUrl, reqData, resolve, reject)
 }
 
-const fetchJSONByPost = (url, target) => (reqData, handleCancel) => axiosPost(url, reqData, target, handleCancel)
-
-function createPOST(){
-
-}
 
 export {
-  fetchJSONByPost,
-  axiosBaseConfig,
+  createHttpPost,
 }
