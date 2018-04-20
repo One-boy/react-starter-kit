@@ -6,28 +6,28 @@ const webpack = require('webpack')
 const webpackConfigBase = require('./webpack.base.config')
 const merge = require('webpack-merge')
 const path = require('path')
-const OpenBrowserPlugin =require('open-browser-webpack-plugin')
+const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 
-function resolve(p){
-    return path.join(__dirname,p)
- }
+function resolve(p) {
+    return path.join(__dirname, p)
+}
 const PORT = 8888
 
-const webpackConfigDev={
+const webpackConfigDev = {
     mode: 'development',
-     plugins:[
+    plugins: [
         new OpenBrowserPlugin({
-            url:`http://localhost:${PORT}`
+            url: `http://localhost:${PORT}/#/login`
         }),
-     ],
-     devtool:'source-map',
-     devServer:{
-         contentBase:resolve('../app'),
-         historyApiFallback:false,
-         hot:false,
-         host:'0.0.0.0',
-         port:PORT,
-     },
- }
+    ],
+    devtool: 'source-map',
+    devServer: {
+        contentBase: resolve('../app'),
+        historyApiFallback: false,
+        hot: false,
+        host: '0.0.0.0',
+        port: PORT,
+    },
+}
 
-module.exports= merge(webpackConfigBase,webpackConfigDev)
+module.exports = merge(webpackConfigBase, webpackConfigDev)
