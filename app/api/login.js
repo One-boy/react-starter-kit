@@ -1,4 +1,4 @@
-import * as ajax from '../utils/ajax'
+import * as ajax from '@utils/ajax'
 
 
 // 登录

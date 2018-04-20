@@ -5,7 +5,7 @@ import {
     Link,
 } from 'react-router-dom'
 
-import Connect from '../../components/store/connect'
+import { Connect } from '@components/store'
 
 @Connect((store) => ({
     config: store.config,
@@ -20,7 +20,7 @@ export default class home extends Component {
     render() {
         return (
             <div className="nav-wrap" style={{ marginTop: '2em', borderTop: '1px solid #ccc' }}>
-                组件二Store=>{this.props.config.name}
+                组件二Store=>{this.props.config && this.props.config.name}
             </div>
         )
     }

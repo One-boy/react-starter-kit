@@ -6,8 +6,8 @@ import {
   prefix,
   suffix,
   timeout
-} from '../config/base'
-import { returnStatus } from '../config/code'
+} from '@config/base'
+import { returnStatus } from '@config/code'
 
 // axios配置
 const axiosBaseConfig = {
@@ -28,10 +28,10 @@ const axiosBaseConfig = {
   // 请求数据预处理
   transformRequest: [(data, headers) => {
     // 加入token？
-    const token = sessionStorage.getItem('token')
-    if (token) {
-      data.token = token
-    }
+    // const token = sessionStorage.getItem('token')
+    // if (token) {
+    //   data.token = token
+    // }
     // 请求对象转换成jon字符串
     if (typeof data === 'object') {
       return JSON.stringify(data)

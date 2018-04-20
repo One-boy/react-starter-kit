@@ -4,7 +4,7 @@ import {
     Route,
     Link,
 } from 'react-router-dom'
-import { httpLogin } from '../../api/login'
+import { httpLogin } from '@api/login'
 
 export default class home extends Component {
 

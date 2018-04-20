@@ -7,7 +7,7 @@ import { Button, Modal, message } from 'antd'
 import {
     Link,
 } from 'react-router-dom'
-import Connect from '../components/store/connect'
+import { Connect } from '@components/store'
 
 @Connect((store) => ({
     config: store.config,
@@ -31,7 +31,7 @@ export default class home extends Component {
                         <ul>
                             <li><Link to="/nav1">to nav1</Link></li>
                             <li><Link to="/nav2">to nav2</Link></li>
-                            <li><Link to="/nav2">{this.props.config.name}</Link></li>
+                            <li><Link to="/nav2">{this.props.config && this.props.config.name}</Link></li>
                         </ul>
                     </div>
                     <div className="main-body-content">
