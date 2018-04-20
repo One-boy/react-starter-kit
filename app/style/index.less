@@ -10,29 +10,15 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    .main-header{
-        height: @header-height;
-        border-bottom: @border;
-        line-height: @header-height;
+    .header .logo{
+        width: 120px;
+        height: 31px;
+        background: rgba(255,255,255,.2);  
+        margin: 16px 28px 16px 0;
+        float: left;
+        line-height: 32px;
         text-align: center;
-    }
-    .main-body{
-        flex: auto;
-        display: flex;
-        .main-body-left{
-            width: 128px;
-            border-right: @border;
-            ul{
-                list-style: none;
-                li{
-                    word-wrap: break-word;
-                }
-            }
-        }
-        .main-body-content{
-            flex: auto;
-            padding: 1em;
-        }
+        color: white;
     }
 }
 
