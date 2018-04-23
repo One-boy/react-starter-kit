@@ -1,7 +1,7 @@
 /**
  * 公共包裹，登录后的页面，都有一个公共的头部和左侧导航栏
  */
-
+/* eslint  react/prop-types:0 */
 import React, { Component } from 'react'
 import { Layout, Menu, Icon } from 'antd'
 import {

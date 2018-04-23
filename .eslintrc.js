@@ -9,7 +9,10 @@ module.exports = {
 		"es6": true
 	},
 	"parser": "babel-eslint",
-	"extends": ["eslint:recommended", "plugin:react/recommended"],
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended"
+	],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"experimentalObjectRestSpread": true,
@@ -22,6 +25,8 @@ module.exports = {
 		"jsx-a11y",
 	],
 	"rules": {
+		"no-console": 0,
+		"react/display-name": 0, //防止在React组件定义中丢失displayName
 		"indent": [
 			"error",
 			2,

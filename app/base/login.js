@@ -1,3 +1,7 @@
+/**
+ * 登录
+ */
+/* eslint  react/prop-types:0 */
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, Checkbox } from 'antd'
 
@@ -22,11 +26,11 @@ export default class Login extends Component {
       }
       console.log('Received values of form: ', values)
       this.props.history && this.props.history.push('/')
-    });
+    })
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = this.props.form
     return (
       <div className="login-wrap">
         <div className="login-content">

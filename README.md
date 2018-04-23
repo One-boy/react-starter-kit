@@ -29,6 +29,7 @@
 - react和react-dom和路由
     - npm install --save react react-dom
     - npm install --save react-router-dom
+    - npm install --save prop-types
 - antd
     - npm install --save antd
     - npm install --save-dev babel-plugin-import

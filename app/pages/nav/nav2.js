@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'antd'
+import PropTypes from 'prop-types'
 import TestStore from './testStore'
 
 import { Connect } from '@components/store'
@@ -13,8 +14,12 @@ export default class home extends Component {
     super(props)
     this.state = {}
   }
+  static propTypes = {
+    config: PropTypes.object,
+  }
 
   updateStore = () => {
+    /* eslint  react/prop-types:0 */
     this.props.StoreHandle && this.props.StoreHandle.setStore('config', { name: `random${Date.now()}` })
   }
   render() {

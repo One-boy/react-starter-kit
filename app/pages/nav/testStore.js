@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 // import { Button, Modal, message } from 'antd'
 
 import { Connect } from '@components/store'
@@ -6,7 +7,7 @@ import { Connect } from '@components/store'
 @Connect((store) => ({
   config: store.config,
 }))
-export default class home extends Component {
+export default class TestStore extends Component {
 
   constructor(props) {
     super(props)
@@ -22,3 +23,6 @@ export default class home extends Component {
   }
 }
 
+TestStore.propTypes = {
+  config: PropTypes.object,
+}

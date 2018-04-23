@@ -1,7 +1,7 @@
 /**
  * 全局store提供者，改变store的方法都在这里
  */
-
+/* eslint  react/prop-types:0 */
 import React, { Component } from 'react'
 import StoreContext from './context'
 
