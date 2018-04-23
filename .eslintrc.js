@@ -1,6 +1,7 @@
 /**
  * eslint配置
  * 使用eslint --init命令生成
+ * 使用vscod下载 eslint插件，编辑时会自动检测语法。
  */
 module.exports = {
 	"env": {
