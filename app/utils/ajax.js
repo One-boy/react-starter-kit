@@ -26,7 +26,7 @@ const axiosBaseConfig = {
   validateStatus: status =>
     status >= 200 && status < 300, // default
   // 请求数据预处理
-  transformRequest: [(data, headers) => {
+  transformRequest: [(data) => {
     // 加入token？
     // const token = sessionStorage.getItem('token')
     // if (token) {
@@ -60,17 +60,17 @@ axiosInstance.interceptors.request.use(req => req, error =>
 axiosInstance.interceptors.response.use(resp => resp, (error) => {
   // 当返回错误时
   if (axios.isCancel(error)) {
-    throw ({ message: "请求被取消" })
+    throw ({ message: '请求被取消' })
   }
   if ('code' in error && error.code === 'ECONNABORTED') {
-    throw ({ message: "请求超时" })
+    throw ({ message: '请求超时' })
   }
   return Promise.reject(error)
 })
 
 const axiosPost = (url, reqData, resolve, reject) => {
-  const CancelToken = axios.CancelToken;
-  const source = CancelToken.source();
+  const CancelToken = axios.CancelToken
+  const source = CancelToken.source()
   axiosInstance.post(url, reqData, {
     cancelToken: source.token,
   })

@@ -5,8 +5,8 @@
 import React from 'react'
 
 const StoreContext = React.createContext({
-    store: {},
-    setStore: () => { },
+  store: {},
+  setStore: () => { },
 })
 
 export default StoreContext

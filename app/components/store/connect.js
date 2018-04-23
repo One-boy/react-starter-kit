@@ -10,17 +10,17 @@ import React from 'react'
 import StoreContext from './context'
 
 const connect = (mapStoreToProps) => (TargetClass) => {
-    return props => (
-        <StoreContext.Consumer>
-            {value =>
-                <TargetClass
-                    {...props}
-                    StoreHandle={{ setStore: value.setStore }}
-                    {...mapStoreToProps(value.store)}
-                />
-            }
-        </StoreContext.Consumer>
-    )
+  return props => (
+    <StoreContext.Consumer>
+      {value =>
+        <TargetClass
+          {...props}
+          StoreHandle={{ setStore: value.setStore }}
+          {...mapStoreToProps(value.store)}
+        />
+      }
+    </StoreContext.Consumer>
+  )
 }
 
 

@@ -32,3 +32,12 @@
 - antd
     - npm install --save antd
     - npm install --save-dev babel-plugin-import
+- eslint
+    - npm install --save-dev eslint
+    - npm install --save-dev eslint-config-standard
+    - npm install --save-dev eslint-plugin-import
+    - npm install --save-dev eslint-plugin-promise
+    - npm install --save-dev eslint-plugin-standard
+    - npm install --save-dev eslint-plugin-node
+    - npm install --save-dev eslint-plugin-react
+    - npm install --save-dev eslint-plugin-jsx-a11y
