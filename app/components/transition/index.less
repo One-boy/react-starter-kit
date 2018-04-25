@@ -2,38 +2,60 @@
 过渡动画
 */
 
-.route-page-transition-container {
+@transition-enter-duration: 250ms;
+@transition-enter-delay: 300ms;
+@transition-exit-duration: 250ms;
+@transition-tb-distance: 10px;
+@transition-ease: ease-in-out;
+.transition-container {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
-}
-
-.route-page-transition-wrapper {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-}
-
-.route-page-transition-move-enter {
-  opacity: 0.01;
-  transform: translate3d(100%, 0, 0);
-}
-
-.route-page-transition-move-enter-active {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-  transition: all 500ms ease-out;
-}
-
-.route-page-transition-move-exit {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-.route-page-transition-move-exit-active {
-  opacity: 0.01;
-  transform: translate3d(-100%, 0, 0);
-  transition: all 500ms ease-in;
+  .transition-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  }
+  /*=======上下淡入淡出 start========*/
+  .transitionAction-fade-tb-enter {
+    opacity: 0.01;
+    transform: translate3d(0, @transition-tb-distance, 0);
+  }
+  .transitionAction-fade-tb-enter-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition: all @transition-enter-duration @transition-enter-delay @transition-ease;
+  }
+  .transitionAction-fade-tb-exit {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  .transitionAction-fade-tb-exit-active {
+    opacity: 0.01;
+    transform: translate3d(0, @transition-tb-distance, 0);
+    transition: all @transition-exit-duration @transition-ease;
+  }
+  /*=======上下淡入淡出 end========*/
+  /*=======左右淡入淡出 start========*/
+  .transitionAction-fade-lr-enter {
+    opacity: 0.01;
+    transform: translate3d(100%, 0, 0);
+  }
+  .transitionAction-fade-lr-enter-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition: all @transition-enter-duration @transition-ease;
+  }
+  .transitionAction-fade-lr-exit {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  .transitionAction-fade-lr-exit-active {
+    opacity: 0.01;
+    transform: translate3d(-100%, 0, 0);
+    transition: all @transition-exit-duration @transition-ease;
+  }
+  /*=======左右淡入淡出 end========*/
 }

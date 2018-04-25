@@ -9,17 +9,28 @@
  * </Switch>
  * )
  */
-
+/* eslint react/no-direct-mutation-state:0*/
+/* eslint react/prop-types:0*/
 import React, { Component } from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
+import { Connect } from '@components/store'
 import './index.less'
 
-
+@Connect(store => ({
+  transitionActionKey: store.transitionActionKey,
+}))
 export default class Transition extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      // 动画方式，默认上下淡入淡出
+      // fade-lr:左右淡入淡出
+      // fade-tb:上下淡入淡出
+      transitionActionKey: 'fade-tb',
+    }
   }
+
 
   static propTypes = {
     children: PropTypes.object,
@@ -28,25 +39,29 @@ export default class Transition extends Component {
       pathname: PropTypes.string,
     })
   }
+
   render() {
+    // 入场和出场的时间,单位ms
     const pageTransitionDuration = {
-      enter: 500,
-      exit: 500,
+      enter: 550,
+      exit: 250,
     }
+    const { transitionActionKey } = this.state
+    const transitionAction = `transitionAction-${transitionActionKey}`
     const { location: { pathname }, children } = this.props
     return (
       <TransitionGroup
-        className="route-page-transition-container"
+        className="transition-container"
         component="div"
       >
         <CSSTransition
           key={pathname || '/'}
-          classNames="route-page-transition-move"
+          classNames={transitionAction}
           mountOnEnter={true}
           unmountOnExit={true}
           timeout={pageTransitionDuration}
         >
-          <div className="route-page-transition-wrapper">
+          <div className="transition-wrapper">
             {children}
           </div>
         </CSSTransition>

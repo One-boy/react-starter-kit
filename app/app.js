@@ -10,8 +10,7 @@ import {
 import MainWrap from './base/index'
 import Login from './base/login'
 import NOTFOUND from './base/notfound'
-import Nav1 from './pages/nav/nav1'
-import Nav2 from './pages/nav/nav2'
+import Base from './pages/base'
 import { Connect } from '@components/store'
 import PropTypes from 'prop-types'
 
@@ -36,8 +35,14 @@ export default class home extends Component {
         <Route exact path="/login" component={Login} />
         <Route path="/" render={(props) => (
           <MainWrap {...props}>
-            <Route path="/jcdh/nav1" component={Nav1} />
-            <Route path="/jcdh/nav2" component={Nav2} />
+            <Route exact path="/bfyy/cmzgl" component={Base} />
+            <Route exact path="/bfyy/cbhk" component={Base} />
+            <Route exact path="/bfyy/dtlw" component={Base} />
+            <Route exact path="/bfyy/twjm" component={Base} />
+            <Route exact path="/bfyy/rcg" component={Base} />
+            <Route exact path="/bfyy/qtbb" component={Base} />
+            <Route exact path="/bjyy/dlxk" component={Base} />
+            <Route exact path="/bjyy/dkwl" component={Base} />
             <Route component={NOTFOUND} />
           </MainWrap>
         )} />
