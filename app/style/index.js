@@ -1,2 +1,2 @@
-import './index.less'
-import './login.less'
+import './base.less'
+import './login/login.less'

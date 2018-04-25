@@ -66,7 +66,7 @@ const webpackConfigBase = {
         ],
       },
       {
-        test: /\.(woff|eot|ttf|svg|gif)$/,
+        test: /\.(woff|eot|ttf|svg)$/,
         use: [{
           loader: 'url-loader',
           options: {
@@ -74,6 +74,18 @@ const webpackConfigBase = {
             name: 'resource/iconfont/[hash:4].[ext]',
           },
         }],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'resource/image/[name].[hash:4].[ext]'
+            }
+          }
+        ],
       },
     ],
   },

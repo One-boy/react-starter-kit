@@ -13,6 +13,8 @@
 import React, { Component } from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
+import './index.less'
+
 
 export default class Transition extends Component {
   constructor(props) {

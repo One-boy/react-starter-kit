@@ -15,7 +15,7 @@ const connect = (mapStoreToProps) => (TargetClass) => {
       {value =>
         <TargetClass
           {...props}
-          StoreHandle={{ setStore: value.setStore }}
+          storeHandle={{ setStore: value.setStore }}
           {...mapStoreToProps(value.store)}
         />
       }

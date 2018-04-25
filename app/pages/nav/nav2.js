@@ -20,7 +20,7 @@ export default class home extends Component {
 
   updateStore = () => {
     /* eslint  react/prop-types:0 */
-    this.props.StoreHandle && this.props.StoreHandle.setStore('config', { name: `random${Date.now()}` })
+    this.props.storeHandle && this.props.storeHandle.setStore('config', { name: `random${Date.now()}` })
   }
   render() {
     return (

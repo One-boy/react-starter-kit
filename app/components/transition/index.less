@@ -1,28 +1,39 @@
-.route-page-transition-container{
-  flex:auto;
+/**
+过渡动画
+*/
+
+.route-page-transition-container {
   position: relative;
-  .route-page-transition-wrapper{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    overflow: auto;
-  }
-  .route-page-transition-move-enter{
-    opacity: 0.01;
-    transform: translate3d(100%,0,0);
-  }
-  .route-page-transition-move-enter-active{
-    opacity: 1;
-    transform: translate3d(0,0,0);
-    transition: all 500ms ease-out;
-  }
-  .route-page-transition-move-exit{
-    opacity: 1;
-    transform: translate3d(0,0,0);
-  }
-  .route-page-transition-move-exit-active{
-    opacity: 0.01;
-    transform: translate3d(-100%,0,0);
-    transition: all 500ms ease-in;
-  }
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.route-page-transition-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.route-page-transition-move-enter {
+  opacity: 0.01;
+  transform: translate3d(100%, 0, 0);
+}
+
+.route-page-transition-move-enter-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: all 500ms ease-out;
+}
+
+.route-page-transition-move-exit {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.route-page-transition-move-exit-active {
+  opacity: 0.01;
+  transform: translate3d(-100%, 0, 0);
+  transition: all 500ms ease-in;
 }

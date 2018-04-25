@@ -24,7 +24,6 @@ export default class Login extends Component {
       if (err) {
         return
       }
-      console.log('Received values of form: ', values)
       this.props.history && this.props.history.push('/')
     })
   }
