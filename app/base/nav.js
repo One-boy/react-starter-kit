@@ -3,16 +3,15 @@
  */
 
 import React, { Component } from 'react'
-import { Connect } from '@components/store'
 import { Menu } from 'antd'
 import { nav } from '@config/base'
 import PropTypes from 'prop-types'
-
+import {
+  withRouter,
+} from 'react-router-dom'
 const SubMenu = Menu.SubMenu
 
-@Connect((store) => ({
-  hashHistory: store.hashHistory,
-}))
+@withRouter
 export default class Nav extends Component {
 
   constructor(props) {
@@ -32,6 +31,16 @@ export default class Nav extends Component {
 
 
   componentWillMount() {
+    this.setOpenKeys()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname.indexOf(this.state.openKeys[0] || 'nomatch')) {
+      this.props = nextProps
+      this.setOpenKeys()
+    }
+  }
+  setOpenKeys = () => {
     // 初始化打开的折叠菜单
     const selectedKeys = this.leftMenuHighLight()
     nav.forEach(item => {

@@ -4,16 +4,13 @@
 
 import React, { Component } from 'react'
 import {
-  Link,
+  Link, withRouter,
 } from 'react-router-dom'
-import { Connect } from '@components/store'
 import { Modal, message } from 'antd'
 import { title } from '@config/base'
 import { httpLogout } from '@api/login'
 
-@Connect((store) => ({
-  hashHistory: store.hashHistory,
-}))
+@withRouter
 export default class home extends Component {
 
   constructor(props) {
@@ -36,10 +33,10 @@ export default class home extends Component {
         const reqData = {}
         httpLogout(reqData, (res) => {
           console.log(res)
-          _self.props.hashHistory.push('/login')
+          _self.props.history.push('/login')
         }, (error) => {
           message.error(error.message || error.msg || '')
-          _self.props.hashHistory.push('/login')
+          _self.props.history.push('/login')
         })
       }
     })

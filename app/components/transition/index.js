@@ -1,25 +1,16 @@
 /**
  * 过渡组件
  * 路由出场入场动画
- * location必须传
- * children=(
- * <Switch location={this.props.location}>
- *    <Route/>
- *    ...
- * </Switch>
- * )
  */
 /* eslint react/no-direct-mutation-state:0*/
 /* eslint react/prop-types:0*/
 import React, { Component } from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
-import { Connect } from '@components/store'
+import { withRouter, Switch } from 'react-router-dom'
 import './index.less'
 
-@Connect(store => ({
-  transitionActionKey: store.transitionActionKey,
-}))
+@withRouter
 export default class Transition extends Component {
   constructor(props) {
     super(props)
@@ -33,13 +24,19 @@ export default class Transition extends Component {
 
 
   static propTypes = {
-    children: PropTypes.object,
+    children: PropTypes.array,
     // 路由组件的location
     location: PropTypes.shape({
       pathname: PropTypes.string,
     })
   }
 
+  /**
+   * pathname阶段，在本系统中，默认pathname超过两个/就为子路由，不加载动画
+   */
+  substrPathname = (pathname) => {
+    return pathname.split('/').slice(0, 3).join('/')
+  }
   render() {
     // 入场和出场的时间,单位ms
     const pageTransitionDuration = {
@@ -48,21 +45,21 @@ export default class Transition extends Component {
     }
     const { transitionActionKey } = this.state
     const transitionAction = `transitionAction-${transitionActionKey}`
-    const { location: { pathname }, children } = this.props
+    const { location, children } = this.props
     return (
       <TransitionGroup
         className="transition-container"
         component="div"
       >
         <CSSTransition
-          key={pathname || '/'}
+          key={this.substrPathname(location.pathname) || '/'}
           classNames={transitionAction}
           mountOnEnter={true}
           unmountOnExit={true}
           timeout={pageTransitionDuration}
         >
           <div className="transition-wrapper">
-            {children}
+            <Switch location={location}> {children}</Switch>
           </div>
         </CSSTransition>
       </TransitionGroup>

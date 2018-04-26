@@ -3,9 +3,6 @@
  */
 /* eslint  react/prop-types:0 */
 import React, { Component } from 'react'
-import {
-  Switch,
-} from 'react-router-dom'
 import Transition from '@components/transition'
 import Header from './header'
 import Nav from './nav'
@@ -19,17 +16,14 @@ export default class home extends Component {
   }
 
   render() {
-    const { location, history } = this.props
     return (
       <div className="main-wrap">
         <Header />
         <div className="main-body">
-          <Nav location={location} history={history} />
+          <Nav />
           <div className="main-body-content">
-            <Transition location={location}>
-              <Switch location={location}>
-                {this.props.children || '无children'}
-              </Switch>
+            <Transition >
+              {this.props.children || '无children'}
             </Transition>
           </div>
         </div>

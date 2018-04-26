@@ -3,20 +3,19 @@
  */
 /* eslint  no-undef:0 */
 
-const global = window || {}
 
 // 本地开发打开的路径以及端口
-global.linkUrl = 'http://127.0.0.1:3000/mock/11/kit'
+let httpUrl = 'http://127.0.0.1:3000/mock/11/kit'
 
 // 生产环境用不同的接口地址
 if (process.env.NODE_ENV === 'production') {
-  global.linkUrl = 'http://127.0.0.1:3000/mock/11/kit'
+  httpUrl = 'http://127.0.0.1:3000/mock/11/kit'
 }
 
 // 标题
 const title = '后台管理'
 // 请求url前缀
-const prefix = global.linkUrl
+const prefix = httpUrl
 // 请求url后缀
 const suffix = ''
 // 超时时间
