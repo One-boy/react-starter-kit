@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toLoginPage } from './index'
 import {
   message
 } from 'antd'
@@ -84,8 +85,7 @@ const axiosPost = (url, reqData, resolve, reject) => {
             break
           case returnStatus.NOT_LOGIN:
             //  退出登录
-            sessionStorage.clear()
-            // to login
+            toLoginPage()
             break
           default:
             reject ? reject(resp) : message.error(resp.msg)
