@@ -33,8 +33,8 @@ const axiosBaseConfig = {
     // if (token) {
     //   data.token = token
     // }
-    // 请求对象转换成jon字符串
-    if (typeof data === 'object') {
+    // 请求对象转换成jon字符串，formdata数据除外
+    if (typeof data === 'object' && !(data instanceof FormData)) {
       return JSON.stringify(data)
     }
     return data
@@ -69,11 +69,12 @@ axiosInstance.interceptors.response.use(resp => resp, (error) => {
   return Promise.reject(error)
 })
 
-const axiosPost = (url, reqData, resolve, reject) => {
+const axiosPost = (url, config, reqData, resolve, reject) => {
   const CancelToken = axios.CancelToken
   const source = CancelToken.source()
   axiosInstance.post(url, reqData, {
     cancelToken: source.token,
+    ...config,
   })
     .then((resp) => resp.data)
     .then(
@@ -98,6 +99,7 @@ const axiosPost = (url, reqData, resolve, reject) => {
   return source.cancel
 }
 
+// post json字符串，即text/plain形式
 const createHttpPost = (url, target) => {
   let newUrl
   if (target) {
@@ -105,10 +107,27 @@ const createHttpPost = (url, target) => {
   } else {
     newUrl = `${prefix}${url}${suffix}`
   }
-  return (reqData, resolve, reject) => axiosPost(newUrl, reqData, resolve, reject)
+  return (reqData, resolve, reject) => axiosPost(newUrl, {}, reqData, resolve, reject)
+}
+
+// post formdata，即multipart/form-data形式，用来上传文件等数据
+const createHttpPostFormData = (url, target) => {
+  let newUrl
+  if (target) {
+    newUrl = `${target}${url}${suffix}`
+  } else {
+    newUrl = `${prefix}${url}${suffix}`
+  }
+  let config = {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+  }
+  return (reqData, resolve, reject) => axiosPost(newUrl, config, reqData, resolve, reject)
 }
 
 
 export {
   createHttpPost,
+  createHttpPostFormData,
 }
