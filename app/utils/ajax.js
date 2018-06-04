@@ -66,6 +66,12 @@ axiosInstance.interceptors.response.use(resp => resp, (error) => {
   if ('code' in error && error.code === 'ECONNABORTED') {
     throw ({ message: '请求超时' })
   }
+  if ('message' in error && error.message === 'Network Error') {
+    throw ({ message: '网络错误' })
+  }
+  if ('response' in error) {
+    throw ({ message: `请求失败，HTTP CODE：${error.response.status}` })
+  }
   return Promise.reject(error)
 })
 
@@ -85,8 +91,10 @@ const axiosPost = (url, config, reqData, resolve, reject) => {
             resolve && resolve(resp)
             break
           case returnStatus.NOT_LOGIN:
-            //  退出登录
-            toLoginPage()
+            message.warn(resp.msg || '登录过期，即将跳转登录页...', 2, () => {
+              //  退出登录
+              toLoginPage()
+            })
             break
           default:
             reject ? reject(resp) : message.error(resp.msg)
@@ -107,27 +115,10 @@ const createHttpPost = (url, target) => {
   } else {
     newUrl = `${prefix}${url}${suffix}`
   }
+  // reqData也可以传FormData,axios会自动识别post类型。
   return (reqData, resolve, reject) => axiosPost(newUrl, {}, reqData, resolve, reject)
 }
 
-// post formdata，即multipart/form-data形式，用来上传文件等数据
-const createHttpPostFormData = (url, target) => {
-  let newUrl
-  if (target) {
-    newUrl = `${target}${url}${suffix}`
-  } else {
-    newUrl = `${prefix}${url}${suffix}`
-  }
-  let config = {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    },
-  }
-  return (reqData, resolve, reject) => axiosPost(newUrl, config, reqData, resolve, reject)
-}
-
-
 export {
   createHttpPost,
-  createHttpPostFormData,
 }
