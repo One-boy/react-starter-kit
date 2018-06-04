@@ -44,14 +44,14 @@ const webpackConfigBase = {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          { loader: 'css-loader', options: { sourceMap: true, miimize: true, } },
         ],
       },
       {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
-          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'css-loader', options: { sourceMap: true, miimize: true, } },
           {
             loader: 'less-loader',
             options: {
