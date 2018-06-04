@@ -18,15 +18,15 @@ const routes = (
     <Route exact path="/login" component={Login} />
     <Route path="/" render={() => (
       <MainWrap>
-        <Route exact path="/bfyy/cmzgl" component={Base} />
-        <Route exact path="/bfyy/cbhk" component={Base} />
-        <Route exact path="/bfyy/dtlw" component={Base} />
-        <Route exact path="/bfyy/twjm" component={Base} />
-        <Route exact path="/bfyy/rcg" component={Base} />
-        <Route exact path="/bfyy/qtbb" component={Base} />
-        <Route exact path="/bjyy/dlxk" component={Base} />
-        <Route exact path="/bjyy/dkwl" component={Base} />
-        <Redirect exact from="/" to="/bfyy/cmzgl" />
+        <Route exact path="/basePage/page1" component={Base} />
+        <Route exact path="/basePage/page2" component={Base} />
+        <Route exact path="/basePage/page3" component={Base} />
+        <Route exact path="/basePage/page4" component={Base} />
+        <Route exact path="/basePage/page5" component={Base} />
+        <Route exact path="/basePage/page6" component={Base} />
+        <Route exact path="/extPage/page1" component={Base} />
+        <Route exact path="/extPage/page2" component={Base} />
+        <Redirect exact from="/" to="/basePage/page1" />
         <Route component={NOTFOUND} />
       </MainWrap>
     )} />

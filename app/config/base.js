@@ -26,37 +26,37 @@ const timeout = 5000
 const nav = [
   {
     navName: '基础应用',
-    navKey: '/bfyy',
+    navKey: '/basePage',
     navIcon: 'desk',
     children: [
       {
         navName: '基础1',
-        navKey: '/bfyy/cmzgl',
+        navKey: '/basePage/page1',
         navIcon: 'desk',
       },
       {
         navName: '基础2',
-        navKey: '/bfyy/cbhk',
+        navKey: '/basePage/page2',
         navIcon: 'module',
       },
       {
         navName: '基础3',
-        navKey: '/bfyy/dtlw',
+        navKey: '/basePage/page3',
         navIcon: 'module',
       },
       {
         navName: '基础4',
-        navKey: '/bfyy/twjm',
+        navKey: '/basePage/page4',
         navIcon: 'module',
       },
       {
         navName: '基础5',
-        navKey: '/bfyy/rcg',
+        navKey: '/basePage/page5',
         navIcon: 'module',
       },
       {
         navName: '基础6',
-        navKey: '/bfyy/qtbb',
+        navKey: '/basePage/page6',
         navIcon: 'module',
       },
 
@@ -64,17 +64,17 @@ const nav = [
   },
   {
     navName: '扩展应用',
-    navKey: '/bjyy',
+    navKey: '/extPage',
     navIcon: 'desk',
     children: [
       {
         navName: '扩展1',
-        navKey: '/bjyy/dlxk',
+        navKey: '/extPage/page1',
         navIcon: 'module',
       },
       {
         navName: '扩展2',
-        navKey: '/bjyy/dkwl',
+        navKey: '/extPage/page2',
         navIcon: 'module',
       },
     ]
