@@ -15,11 +15,12 @@ const axiosBaseConfig = {
   // baseURL: prefix,
   timeout: timeout,
   headers: {
-    'Content-Type': 'text/plain'
+    // 'Content-Type': 'text/plain',
+    'Content-Type': 'application/json'
   },
   method: 'post',
   // 跨域请求，是否带上认证信息
-  withCredentials: false, // default
+  withCredentials: true, // default
   // http返回的数据类型
   // 默认是json，可选'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
   responseType: 'json', // default

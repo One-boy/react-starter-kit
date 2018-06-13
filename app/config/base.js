@@ -5,7 +5,7 @@
 
 
 // 本地开发打开的路径以及端口
-let httpUrl = 'http://127.0.0.1:3000/mock/11/kit'
+let httpUrl = 'http://127.0.0.1:12580'
 
 // 生产环境用不同的接口地址
 if (process.env.NODE_ENV === 'production') {
