@@ -40,9 +40,10 @@ export default class Login extends Component {
         httpRegister(reqData, res => {
           this.setState({
             btnLoading: false,
+            isRegister: false,
           })
           console.log(res)
-          this.props.history && this.props.history.push('/')
+          // this.props.history && this.props.history.push('/')
         }, (error) => {
           message.warn(error.msg || error.message || '未知错误')
           this.setState({
@@ -55,7 +56,7 @@ export default class Login extends Component {
             btnLoading: false,
           })
           console.log(res)
-          // this.props.history && this.props.history.push('/')
+          this.props.history && this.props.history.push('/')
         }, (error) => {
           message.warn(error.msg || error.message || '未知错误')
           this.setState({
@@ -129,7 +130,7 @@ export default class Login extends Component {
               )}
               {/* <a className="login-form-forgot" href="">忘记密码</a> */}
               <Button type="primary" htmlType="submit" className="login-form-button" loading={btnLoading}>
-                {registerText === '登录' ? '注册' : registerText}
+                {registerText === '登录' ? '注册' : '登录'}
               </Button>
               <a onClick={this.chanageRegister}>{registerText}</a>
             </FormItem>
