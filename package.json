@@ -49,10 +49,12 @@
     "antd": "^3.4.1",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "blob-polyfill": "^2.0.20171115",
+    "formdata-polyfill": "^3.0.10",
     "prop-types": "^15.6.1",
     "raf": "^3.4.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "react-router-dom": "^4.2.2",
     "react-transition-group": "^2.3.1"
   }

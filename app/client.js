@@ -5,6 +5,8 @@ import 'raf/polyfill'
 // import 'core-js/es6/map'
 // import 'core-js/es6/set'
 // import 'core-js/modules/es6.symbol'
+// require('blob-polyfill')
+// require('formdata-polyfill')
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -21,7 +23,7 @@ import './style/index.js'
 
 // 全局store初始值
 const store = {}
-
+window.Blob = {}
 ReactDOM.render(
   <StoreProvider store={store}>
     <LocaleProvider locale={zh_CN}>
