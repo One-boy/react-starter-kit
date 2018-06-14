@@ -4,7 +4,7 @@
             "env",
             {
                 "targets": {
-                    "chrome": 42
+                    "chrome": 20
                 }
             }
         ],

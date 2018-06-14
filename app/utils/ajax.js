@@ -41,7 +41,7 @@ const axiosBaseConfig = {
     return data
   }],
   // 返回数据预处理
-  transformResponse: [respData =>
+  transformResponse: [respData => {
     // 检查返回status值
     // if (typeof respData.status !== 'undefined') {
     //   if (respData.status === 1) {
@@ -49,7 +49,17 @@ const axiosBaseConfig = {
     //   }
     //   throw new Error(respData.errMsg || 'respData.status不为0')
     // }
-    respData,
+    // 针对ie处理一下字符串情况
+    if (typeof respData === 'string') {
+      try {
+        return JSON.parse(respData)
+      } catch (error) {
+        // ...
+      }
+    }
+    return respData
+  }
+    ,
   ],
 }
 // axios 实例
@@ -83,7 +93,9 @@ const axiosPost = (url, config, reqData, resolve, reject) => {
     cancelToken: source.token,
     ...config,
   })
-    .then((resp) => resp.data)
+    .then((resp) => {
+      return resp.data
+    })
     .then(
       resp => {
         switch (resp.status) {
