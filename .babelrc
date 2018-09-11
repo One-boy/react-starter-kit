@@ -19,6 +19,7 @@
                 "libraryName": "antd",
                 "style": true
             }
-        ]
+        ],
+        "syntax-dynamic-import"
     ]
 }
