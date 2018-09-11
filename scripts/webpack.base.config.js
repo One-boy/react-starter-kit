@@ -6,6 +6,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HappyPack = require('happypack')
+const os = require('os')
+const threadPool = HappyPack.ThreadPool({ size: os.cpus().length })
+
 
 function resolve(p) {
   return path.join(__dirname, p)
@@ -38,31 +42,13 @@ const webpackConfigBase = {
       {
         exclude: /node_modules/,
         test: /\.(js|jsx)$/,
-        use: 'babel-loader'
+        use: 'happypack/loader?id=happyBabel',
       },
       {
-        test: /\.css$/,
+        test: /\.(css|less)$/,
         use: [
           MiniCssExtractPlugin.loader,
-          { loader: 'css-loader', options: { sourceMap: true, miimize: true, } },
-        ],
-      },
-      {
-        test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          { loader: 'css-loader', options: { sourceMap: true, miimize: true, } },
-          {
-            loader: 'less-loader',
-            options: {
-              sourceMap: true,
-              javascriptEnabled: true,
-              paths: [
-                resolve('../node_modules'),
-                resolve('../app/style'),
-              ]
-            }
-          }
+          'happypack/loader?id=happyStyle',
         ],
       },
       {
@@ -90,6 +76,35 @@ const webpackConfigBase = {
     ],
   },
   plugins: [
+    // happypack处理js
+    new HappyPack({
+      id: 'happyBabel',
+      loaders: [
+        { loader: 'babel-loader' },
+      ],
+      threadPool,
+      verbose: true,
+    }),
+    // happypack处理样式
+    new HappyPack({
+      id: 'happyStyle',
+      loaders: [
+        { loader: 'css-loader', options: { sourceMap: true, miimize: true, } },
+        {
+          loader: 'less-loader',
+          options: {
+            sourceMap: true,
+            javascriptEnabled: true,
+            paths: [
+              resolve('../node_modules'),
+              resolve('../app/style'),
+            ]
+          }
+        }
+      ],
+      threadPool,
+      verbose: true,
+    }),
     // 打包后的资源引用到html文件内
     new HtmlWebpackPlugin({
       template: resolve('../app/index.html'),
