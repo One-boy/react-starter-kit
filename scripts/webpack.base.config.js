@@ -89,7 +89,7 @@ const webpackConfigBase = {
     new HappyPack({
       id: 'happyStyle',
       loaders: [
-        { loader: 'css-loader', options: { sourceMap: true, miimize: true, } },
+        { loader: 'css-loader', options: { sourceMap: true, minimize: true, } },
         {
           loader: 'less-loader',
           options: {
