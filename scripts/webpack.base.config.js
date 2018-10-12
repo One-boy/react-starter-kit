@@ -90,6 +90,7 @@ const webpackConfigBase = {
       id: 'happyStyle',
       loaders: [
         { loader: 'css-loader', options: { sourceMap: true, minimize: true, } },
+        { loader: 'postcss-loader', options: { sourceMap: true } },
         {
           loader: 'less-loader',
           options: {
