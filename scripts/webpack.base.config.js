@@ -3,6 +3,7 @@
  * webpack基础配置
  */
 /* eslint no-undef:0 */
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -121,7 +122,7 @@ const webpackConfigBase = {
     // 使用的时候，则需要引入中文包，
     // import 'moment/locale/zh-cn'
     // moment.locale('zh-cn') // 设置为中文
-    new webpackConfigBase.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
 }
 
