@@ -116,7 +116,12 @@ const webpackConfigBase = {
       // both options are optional
       filename: 'style.[hash:4].css',
       chunkFilename: '[id].css'
-    })
+    }),
+    // 去掉moment语言包
+    // 使用的时候，则需要引入中文包，
+    // import 'moment/locale/zh-cn'
+    // moment.locale('zh-cn') // 设置为中文
+    new webpackConfigBase.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
 }
 
