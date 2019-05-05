@@ -1,29 +1,29 @@
+/*
+ * @Author: hy 
+ * @Date: 2019-05-05 17:23:01 
+ * @Last Modified by: hy
+ * @Last Modified time: 2019-05-05 18:18:00
+ */
+
+//tab1
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { httpUpload } from '@api/base'
 
-export default class base1 extends Component {
-
+export default class Tab1 extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      text: 123,
-      loading: false,
-    }
+    this.state = {}
     this.style = {
       height: '100%',
       paddingTop: 30,
     }
   }
 
-  static propTypes = {
-    location: PropTypes.object.isRequired,
-  }
-
   /**
-   * 文件变化
-   */
+ * 文件变化
+ */
   onFileChange = (e) => {
     const files = e.target.files
     if (files.length) {
@@ -46,6 +46,7 @@ export default class base1 extends Component {
     const { imgUrl } = this.state
     return (
       <div style={this.style}>
+        <h3>tab1</h3>
         <input type='file' onChange={this.onFileChange} />
         <div style={{ width: 500 }}>
           <img src={imgUrl} style={{ maxWidth: '100%' }} />

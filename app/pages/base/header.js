@@ -1,6 +1,11 @@
-/**
- * 公共头部
+/*
+ * @Author: hy 
+ * @Date: 2019-05-05 17:47:14 
+ * @Last Modified by:   hy 
+ * @Last Modified time: 2019-05-05 17:47:14 
  */
+
+// 公共头部
 
 import React, { Component } from 'react'
 import {
@@ -11,7 +16,7 @@ import { title } from '@config/base'
 import { httpLogout } from '@api/login'
 
 @withRouter
-export default class home extends Component {
+export default class Header extends Component {
 
   constructor(props) {
     super(props)

@@ -1,6 +1,12 @@
-/**
- * 登录
+/*
+ * @Author: hy 
+ * @Date: 2019-05-05 17:48:01 
+ * @Last Modified by: hy
+ * @Last Modified time: 2019-05-05 17:49:47
  */
+
+// 登录
+
 /* eslint  react/prop-types:0 */
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd'
@@ -62,6 +68,7 @@ export default class Login extends Component {
           this.setState({
             btnLoading: false,
           })
+          this.props.history && this.props.history.push('/')
         })
       }
 

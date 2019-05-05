@@ -18,7 +18,7 @@ function resolve(p) {
 
 const webpackConfigBase = {
   entry: {
-    client: ['babel-polyfill', resolve('../app/client.js')]
+    client: ['@babel/polyfill', resolve('../app/client.js')]
   },
   output: {
     path: resolve('../dist'),

@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 import { Provider as StoreProvider } from './components/store'
 import './style/index.less'
-import Routes from './routes'
+import Index from './pages'
 
 // 全局store初始值
 const store = {}
@@ -18,7 +18,7 @@ ReactDOM.render(
   <StoreProvider store={store}>
     <LocaleProvider locale={zh_CN}>
       <Router>
-        {Routes}
+        <Index />
       </Router>
     </LocaleProvider>
   </StoreProvider>

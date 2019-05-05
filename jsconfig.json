@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "@api/*": [
+        "app/api/*"
+      ],
+      "@resource/*": [
+        "app/resource/*"
+      ],
+      "@components/*": [
+        "app/components/*"
+      ],
+      "@config/*": [
+        "app/config/*"
+      ],
+      "@pages/*": [
+        "app/pages/*"
+      ],
+      "@utils/*": [
+        "app/utils/*"
+      ],
+      "@style/*": [
+        "app/style/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
