@@ -90,8 +90,17 @@ const webpackConfigBase = {
     new HappyPack({
       id: 'happyStyle',
       loaders: [
-        { loader: 'css-loader', options: { sourceMap: true, minimize: true, } },
-        { loader: 'postcss-loader', options: { sourceMap: true } },
+        {
+          loader: 'css-loader', options: {
+            sourceMap: true,
+            minimize: true, //这个需要注释，如果开启，则开发时样式sourcemap始终是最后一行。
+          }
+        },
+        {
+          loader: 'postcss-loader', options: {
+            sourceMap: true,//为true,在样式追溯时，显示的是编写时的样式，为false，则为编译后的样式
+          }
+        },
         {
           loader: 'less-loader',
           options: {
