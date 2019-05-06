@@ -2,7 +2,7 @@
  * @Author: hy 
  * @Date: 2019-05-05 17:48:17 
  * @Last Modified by: hy
- * @Last Modified time: 2019-05-05 18:44:17
+ * @Last Modified time: 2019-05-06 10:46:53
  */
 
 // 测试页
@@ -10,7 +10,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Tabs } from 'antd'
-import { Route } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import tab1 from './child/tab1'
 import tab2 from './child/tab2'
 import tab3 from './child/tab3'
@@ -36,6 +36,12 @@ export default class test1 extends Component {
     match: PropTypes.object.isRequired,
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.location.pathname !== state.activeKey) {
+      return { activeKey: props.location.pathname }
+    }
+    return null
+  }
 
   // tab变化
   onChangeTab = (activeKey) => {
@@ -48,7 +54,7 @@ export default class test1 extends Component {
   render() {
     const { url } = this.props.match
     const { activeKey } = this.state
-    console.log(this.props)
+
     return (
       <div style={this.style}>
         <Tabs activeKey={activeKey} onChange={this.onChangeTab}>
@@ -56,9 +62,12 @@ export default class test1 extends Component {
           <TabPane tab="Tab 2" key={`${url}/tab2`} />
           <TabPane tab="Tab 3" key={`${url}/tab3`} />
         </Tabs>
-        <Route exact path={`${url}/tab1`} component={tab1} />
-        <Route exact path={`${url}/tab2`} component={tab2} />
-        <Route exact path={`${url}/tab3`} component={tab3} />
+        <Switch>
+          <Route exact path={`${url}/tab1`} component={tab1} />
+          <Route exact path={`${url}/tab2`} component={tab2} />
+          <Route exact path={`${url}/tab3`} component={tab3} />
+          <Redirect from={url} to={`${url}/tab1`} />
+        </Switch>
       </div>
     )
   }
