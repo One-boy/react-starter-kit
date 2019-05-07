@@ -4,6 +4,7 @@
 - antd使用`babel-plugin-import`按需加载
 - `node v8.6.0`
 - `npm v5.3`
+
 ### 安装
 - git clone 本项目
 - npm install
@@ -45,6 +46,10 @@
 - .eslintrc.js -- eslint配置文件
 - jsconfig.json -- 挡在webpack配置了`alias`时，这个文件可以解决导入相关包无法自动提示的问题（在vscode中可行）
 - postcss.config.js -- postcss配置文件
+
+### 支持浏览器
+- 良好支持：**IE10+; EDGE;  chrome21+; safari6.1+;firefox28+**
+- 有少许问题，主要是老式`flexbox`语法问题:**IE9+; EDGE;  chrome4+; safari3.1+;firefox2+**
 
 ### 其它说明
 - 有什么建议或问题随时和我交流
