@@ -36,6 +36,7 @@ const webpackConfigBase = {
       '@config': resolve('../app/config'),
       '@pages': resolve('../app/pages'),
       '@utils': resolve('../app/utils'),
+      '@Mock': resolve('../app/Mock'),
     },
   },
   module: {

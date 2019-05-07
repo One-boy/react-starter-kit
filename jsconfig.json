@@ -24,6 +24,9 @@
       ],
       "@style/*": [
         "app/style/*"
+      ],
+      "@Mock/*": [
+        "app/Mock/*"
       ]
     }
   },

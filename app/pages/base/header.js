@@ -1,8 +1,8 @@
 /*
  * @Author: hy 
  * @Date: 2019-05-05 17:47:14 
- * @Last Modified by:   hy 
- * @Last Modified time: 2019-05-05 17:47:14 
+ * @Last Modified by: hy
+ * @Last Modified time: 2019-05-07 14:00:27
  */
 
 // 公共头部
@@ -13,10 +13,10 @@ import {
 } from 'react-router-dom'
 import { Modal, message } from 'antd'
 import { title } from '@config/base'
-import { httpLogout } from '@api/login'
+import AJAXUser from '@api/User'
 
 @withRouter
-export default class Header extends Component {
+class Header extends Component {
 
   constructor(props) {
     super(props)
@@ -33,16 +33,12 @@ export default class Header extends Component {
     Modal.confirm({
       title: '提示',
       content: '确认退出登录吗？',
-      onOk() {
+      async onOk() {
         // 退出请求
         const reqData = {}
-        httpLogout(reqData, (res) => {
-          console.log(res)
-          _self.props.history.push('/login')
-        }, (error) => {
-          message.error(error.message || error.msg || '')
-          _self.props.history.push('/login')
-        })
+        let data = await AJAXUser.logout(reqData)
+        message.success(data.msg || '退出成功')
+        _self.props.history.push('/login')
       }
     })
   }
@@ -64,3 +60,5 @@ export default class Header extends Component {
     )
   }
 }
+
+export default Header

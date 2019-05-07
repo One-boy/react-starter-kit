@@ -2,7 +2,7 @@
  * @Author: hy 
  * @Date: 2019-05-05 17:48:01 
  * @Last Modified by: hy
- * @Last Modified time: 2019-05-05 17:49:47
+ * @Last Modified time: 2019-05-07 14:05:04
  */
 
 // 登录
@@ -10,12 +10,12 @@
 /* eslint  react/prop-types:0 */
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd'
-import { httpLogin, httpRegister } from '@api/login'
+import AJAXUser from '@api/User'
 
 const FormItem = Form.Item
 
 @Form.create()
-export default class Login extends Component {
+class Login extends Component {
 
   constructor(props) {
     super(props)
@@ -34,42 +34,27 @@ export default class Login extends Component {
    */
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       if (err) {
         return
       }
       const reqData = values
-      this.setState({
-        btnLoading: true,
-      })
+      this.setState({ btnLoading: true })
+
       if (this.state.isRegister) {
-        httpRegister(reqData, res => {
-          this.setState({
-            btnLoading: false,
-            isRegister: false,
-          })
-          console.log(res)
-          // this.props.history && this.props.history.push('/')
-        }, (error) => {
-          message.warn(error.msg || error.message || '未知错误')
-          this.setState({
-            btnLoading: false,
-          })
-        })
+        let data = await AJAXUser.register(reqData)
+        console.log('返回注册数据', data)
+        this.props.history && this.props.history.push('/')
       } else {
-        httpLogin(reqData, res => {
-          this.setState({
-            btnLoading: false,
-          })
-          console.log(res)
+        try {
+          let data = await AJAXUser.login(reqData)
+          console.log('返回登录数据', data)
           this.props.history && this.props.history.push('/')
-        }, (error) => {
-          message.warn(error.msg || error.message || '未知错误')
-          this.setState({
-            btnLoading: false,
-          })
-          this.props.history && this.props.history.push('/')
-        })
+        } catch (error) {
+          console.log('返回错误', error)
+          this.setState({ btnLoading: false })
+        }
+
       }
 
     })
@@ -114,7 +99,7 @@ export default class Login extends Component {
                 : null
             }
             <FormItem>
-              {getFieldDecorator('userName', {
+              {getFieldDecorator('username', {
                 rules: [{ required: true, message: '请输入用户名' }],
               })(
                 <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
@@ -147,3 +132,5 @@ export default class Login extends Component {
     )
   }
 }
+
+export default Login

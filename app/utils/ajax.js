@@ -1,26 +1,22 @@
 import axios from 'axios'
-import { toLoginPage } from './index'
-import {
-  message
-} from 'antd'
 import {
   prefix,
   suffix,
   timeout
 } from '@config/base'
-import { returnStatus } from '@config/code'
+
 
 // axios配置
 const axiosBaseConfig = {
   // baseURL: prefix,
   timeout: timeout,
   headers: {
-    // 'Content-Type': 'text/plain',
-    'Content-Type': 'application/json'
+    'Content-Type': 'text/plain',
+    // 'Content-Type': 'application/json'
   },
   method: 'post',
   // 跨域请求，是否带上认证信息
-  withCredentials: true, // default
+  withCredentials: false, // default
   // http返回的数据类型
   // 默认是json，可选'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
   responseType: 'json', // default
@@ -71,88 +67,51 @@ axiosInstance.interceptors.response.use(resp => resp, (error) => {
   return Promise.reject(error)
 })
 
-const axiosPost = (url, config, reqData, resolve, reject) => {
+const axiosPost = (url, config, reqData) => {
   const CancelToken = axios.CancelToken
   const source = CancelToken.source()
-  axiosInstance.post(url, reqData, {
+  return axiosInstance.post(url, reqData, {
     cancelToken: source.token,
     ...config,
   })
     .then((resp) => {
       return resp.data
     })
-    .then(
-      resp => {
-        switch (resp.status) {
-          case returnStatus.NORMAL:
-            // 正常数据
-            resolve && resolve(resp)
-            break
-          case returnStatus.NOT_LOGIN:
-            message.warn(resp.msg || '登录过期，即将跳转登录页...', 2, () => {
-              //  退出登录
-              toLoginPage()
-            })
-            break
-          default:
-            reject ? reject(resp) : message.error(resp.msg)
-            break
-        }
-      }
-    ).catch(err => {
-      reject ? reject(err) : message.error(err.message || '未知错误')
-    })
-  return source.cancel
 }
 
 
-const axiosGet = (url, config, reqData, resolve, reject) => {
+const axiosGet = (url, config, reqData) => {
   const CancelToken = axios.CancelToken
   const source = CancelToken.source()
 
-  let reqStr = ''
+  let reqArray = []
   Object.keys(reqData).forEach(key => {
-    reqStr += `${key}=`
-    reqStr += encodeURIComponent(reqData[key])
-    reqStr += '&'
+    reqArray.push(`${key}=${encodeURIComponent(reqData[key])}`)
   })
-  let newUrl = `${url}?${reqStr}`
+  let newUrl = `${url}?${reqArray.join('&')}`
 
-  axiosInstance.get(newUrl, {
+  return axiosInstance.get(newUrl, {
     cancelToken: source.token,
     ...config,
   })
-    .then((resp) => JSON.parse((resp.data).replace(/'/g, '"')))
-    .then(
-      resp => {
-        if (resp && Array.isArray(resp)) {
-          // 正常数据
-          resolve && resolve(resp)
-        } else {
-          reject ? reject(resp) : message.error(resp.msg)
-        }
-      }
-    ).catch(err => {
-      reject ? reject(err) : message.error(err.message || '未知错误')
-    })
-  return source.cancel
+    .then((resp) => resp.data)
 }
 
 
 // post json字符串，即text/plain形式
-const createHttpPost = (url, target) => {
+const createHttpPost = (url, reqData, target) => {
   let newUrl
   if (target) {
     newUrl = `${target}${url}${suffix}`
   } else {
     newUrl = `${prefix}${url}${suffix}`
   }
-  // reqData也可以传FormData,axios会自动识别post类型。
-  return (reqData, resolve, reject) => axiosPost(newUrl, {}, reqData, resolve, reject)
+
+  return axiosPost(newUrl, {}, reqData)
 }
 
 
-const createHttpGet = (url, target) => {
+const createHttpGet = (url, reqData, target) => {
   let newUrl
   if (target) {
     newUrl = `${target}${url}${suffix}`
@@ -160,7 +119,7 @@ const createHttpGet = (url, target) => {
     newUrl = `${prefix}${url}${suffix}`
   }
 
-  return (reqData, resolve, reject) => axiosGet(newUrl, {}, reqData, resolve, reject)
+  return axiosGet(newUrl, {}, reqData)
 }
 
 export {

@@ -5,11 +5,11 @@
 
 
 // 本地开发打开的路径以及端口
-let httpUrl = 'http://127.0.0.1:12580'
+let httpUrl = 'http://41.196.99.48:8080/data'
 
 // 生产环境用不同的接口地址
 if (process.env.NODE_ENV === 'production') {
-  httpUrl = 'http://127.0.0.1:3000/mock/11/kit'
+  httpUrl = 'http://41.196.99.48:8080/data'
 }
 
 // 标题
@@ -17,7 +17,7 @@ const title = '后台管理'
 // 请求url前缀
 const prefix = httpUrl
 // 请求url后缀
-const suffix = ''
+const suffix = '.json'
 // 超时时间
 const timeout = 5000
 
