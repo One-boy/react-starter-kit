@@ -7,9 +7,13 @@
 // 本地开发打开的路径以及端口
 let httpUrl = 'http://41.196.99.48:8080/data'
 
+// 启用Mock
+let EnableMock = true
+
 // 生产环境用不同的接口地址
 if (process.env.NODE_ENV === 'production') {
   httpUrl = 'http://41.196.99.48:8080/data'
+  EnableMock = false
 }
 
 // 标题
@@ -19,7 +23,7 @@ const prefix = httpUrl
 // 请求url后缀
 const suffix = '.json'
 // 超时时间
-const timeout = 5000
+const timeout = 10000
 
 
 // 左侧导航配置
@@ -86,4 +90,5 @@ export {
   timeout,
   title,
   nav,
+  EnableMock,
 }

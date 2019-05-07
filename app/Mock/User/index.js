@@ -2,14 +2,16 @@
  * @Author: hy 
  * @Date: 2019-05-06 18:28:24 
  * @Last Modified by: hy
- * @Last Modified time: 2019-05-07 14:05:59
+ * @Last Modified time: 2019-05-07 15:48:52
  */
 
 // mock数据
 import mock from '@Mock/base'
+import checkEnable from '@Mock/checkEnable'
 
 class User {
 
+  @checkEnable
   static login(target, name, descriptor) {
 
     descriptor.value = async (reqData) => {
@@ -26,6 +28,7 @@ class User {
     return descriptor
   }
 
+  @checkEnable
   static logout(target, name, descriptor) {
 
     descriptor.value = async (reqData) => {
@@ -42,6 +45,7 @@ class User {
     return descriptor
   }
 
+  @checkEnable
   static register(target, name, descriptor) {
 
     descriptor.value = async (reqData) => {
