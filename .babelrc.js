@@ -24,8 +24,15 @@ const plugins = [
     //实验性功能：装饰器
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     //实验性功能：类属性，如类类的方法可直接赋值为箭头函数，在react中不用在构造函数中bind
-    ["@babel/plugin-proposal-class-properties", { "loose": true }]
-
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    //antd的按需加载
+    [
+        "import",
+        {
+            "libraryName": "antd",
+            "style": true
+        }
+    ]
 ]
 
 

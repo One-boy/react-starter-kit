@@ -17,7 +17,7 @@ const webpackConfigDev = {
   mode: 'development',
   plugins: [
     new OpenBrowserPlugin({
-      url: `http://localhost:${PORT}/`
+      url: `http://localhost:${PORT}/#/login`
     }),
   ],
   devtool: 'source-map',

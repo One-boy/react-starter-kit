@@ -2,7 +2,7 @@
  * @Author: hy 
  * @Date: 2019-05-07 10:02:41 
  * @Last Modified by: hy
- * @Last Modified time: 2019-05-07 19:17:42
+ * @Last Modified time: 2019-05-07 13:49:51
  */
 
 // api父类
@@ -10,9 +10,9 @@
 import * as ajax from '@utils/ajax'
 import { returnStatus } from '@config/code'
 import { toLoginPage } from '@utils/index'
-// import {
-//   message
-// } from 'antd'
+import {
+  message
+} from 'antd'
 
 class ApiBase {
 
@@ -38,17 +38,17 @@ class ApiBase {
               resolve(resp)
               break
             case returnStatus.NOT_LOGIN:
-              // message.warn(resp.msg || '登录过期，即将跳转登录页...', 2, () => {
-              //   //  退出登录
-              //   toLoginPage()
-              // })
+              message.warn(resp.msg || '登录过期，即将跳转登录页...', 2, () => {
+                //  退出登录
+                toLoginPage()
+              })
               break
             default:
               throw new Error(resp.msg)
           }
         }
       ).catch(err => {
-        // message.warning(err.msg || err.message || '未知错误')
+        message.warning(err.msg || err.message || '未知错误')
         reject(err)
       })
     })
