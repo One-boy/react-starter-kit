@@ -50,6 +50,7 @@
 - 良好支持：**iOS7+,Android4.4+**
 
 ### 其它说明
+- [framework7-react文档](https://framework7.io/react/introduction.html)
 - 有什么建议或问题随时和我交流
 
 ### 图片演示
