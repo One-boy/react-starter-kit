@@ -1,26 +1,25 @@
 
-import 'raf/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { LocaleProvider } from 'antd'
-import zh_CN from 'antd/lib/locale-provider/zh_CN'
-import {
-  HashRouter as Router,
-} from 'react-router-dom'
+import Framework7React from 'framework7-react'
+// Import F7 Bundle
+import Framework7 from 'framework7/framework7.esm.bundle.js'
+import 'framework7/css/framework7.bundle.css'
 import { Provider as StoreProvider } from './components/store'
 import './style/index.less'
-import Index from './pages'
+import App from './App'
+
+
+// Init F7-React Plugin
+Framework7.use(Framework7React)
 
 // 全局store初始值
 const store = {}
 window.Blob = {}
+
 ReactDOM.render(
   <StoreProvider store={store}>
-    <LocaleProvider locale={zh_CN}>
-      <Router>
-        <Index />
-      </Router>
-    </LocaleProvider>
+    <App />
   </StoreProvider>
   ,
   document.getElementById('root')
