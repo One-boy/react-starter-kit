@@ -1,4 +1,4 @@
-# 基于react iOS,Android端以及webap的开发基础脚手架
+# 基于react 的iOS,Android端以及webapp的开发基础脚手架
 ### 技术栈及环境
 - `react@16.8.6+webpack@4.x+framework7-react@4.3.1`
 - `node v8.6.0`
