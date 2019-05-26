@@ -1,0 +1,5 @@
+# eslint忽略文件
+*.e2e.js
+*.test.js
+jest*.js
+puppeteer*.js

@@ -1,6 +1,6 @@
 # 基于react PC端的中后台开发基础脚手架
 ### 技术栈及环境
-- `react@16.8.6+webpack@4.x+antd@3.16.x+react-router@4.3.x`
+- `react@16.x+webpack@4.x+antd@3.x+react-router@4.3.x`
 - antd使用`babel-plugin-import`按需加载
 - `node v8.6.0`
 - `npm v5.3`
@@ -13,6 +13,8 @@
 
 ### 使用说明
 - 样式：预编译采用`Less`，模块化启用了`cssModules`
+- 测试：单元测试使用`jest+enzyme`，e2e（端到端）测试使用`jest+puppeteer`
+   - 运行命令：`npm run test:js`和`npm run test:ui`
 
 ### 目录文件介绍
 
