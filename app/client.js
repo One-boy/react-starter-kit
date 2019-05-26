@@ -8,7 +8,7 @@ import {
   HashRouter as Router,
 } from 'react-router-dom'
 import { Provider as StoreProvider } from './components/store'
-import './style/index.less'
+import './style/base.less' // 引入全局样式
 import Index from './pages'
 
 // 全局store初始值

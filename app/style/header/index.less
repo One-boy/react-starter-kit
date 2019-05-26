@@ -1,6 +1,7 @@
 // 头部样式
+@import './theme/index';
 
-.main-header{
+.header {
   height: @header-height;
   color: white;
   background-color: #233444;
@@ -8,35 +9,41 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  .header-brand{
-    display: flex;
-    align-items: center;
-    .logo{
-      background-image: url(../../resource/image/icon/logo.jpg);
-      background-repeat: no-repeat;
-      background-size: 28px 27px;
-      width: 28px;
-      height: 27px;
-    }
-    .brand-text{
-      font-size: 16px;
-      font-weight: bold;
-      margin-left: 12px;
-      color: #c5c5c5;
-      letter-spacing: 4px;
-      transition: color 250ms;
-      &:hover{
-        color: white;
-      }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+
+  .logo {
+    background-image: url(../../resource/image/icon/logo.jpg);
+    background-repeat: no-repeat;
+    background-size: 28px 27px;
+    width: 28px;
+    height: 27px;
+  }
+
+  .text {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 12px;
+    color: #c5c5c5;
+    letter-spacing: 4px;
+    transition: color 250ms;
+
+    &:hover {
+      color: white;
     }
   }
-  .header-user{
-    .header-user-logout{
-      margin-left: 12px;
-      color: #c5c5c5;
-      &:hover{
-        color: white;
-      }
+}
+
+.user {
+  .userLogout {
+    margin-left: 12px;
+    color: #c5c5c5;
+
+    &:hover {
+      color: white;
     }
   }
 }

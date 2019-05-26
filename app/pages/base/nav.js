@@ -5,16 +5,17 @@
  * @Last Modified time: 2019-05-05 17:47:31 
  */
 
- // 左侧导航
- 
+// 左侧导航
+
 import React, { Component } from 'react'
 import { Menu } from 'antd'
-import  {menusData}  from '@/config/base'
+import { menusData } from '@/config/base'
 import PropTypes from 'prop-types'
 import {
   withRouter,
 } from 'react-router-dom'
-import {getOpenKeys,getSelectKeys} from './navUtils'
+import styles from '@/style/menu/index.less'
+import { getOpenKeys, getSelectKeys } from './navUtils'
 
 const SubMenu = Menu.SubMenu
 
@@ -28,7 +29,7 @@ export default class Nav extends Component {
       // 是否迷你模式
       isMini: false,
       // 当前展开的submenu菜单项key数组
-      openKeys:getOpenKeys(props,menusData),
+      openKeys: getOpenKeys(props, menusData),
     }
   }
 
@@ -37,17 +38,17 @@ export default class Nav extends Component {
     history: PropTypes.object,
   }
 
-  componentDidMount(){
+  componentDidMount() {
 
   }
 
 
-  static getDerivedStateFromProps(props,state){
-    const {pathname} = state
-    if(props.location.pathname !== pathname){
+  static getDerivedStateFromProps(props, state) {
+    const { pathname } = state
+    if (props.location.pathname !== pathname) {
       return {
-        pathname:props.location.pathname,
-        openKeys:getOpenKeys(props,menusData),
+        pathname: props.location.pathname,
+        openKeys: getOpenKeys(props, menusData),
       }
     }
     return null
@@ -141,7 +142,7 @@ export default class Nav extends Component {
           theme="dark"
           inlineIndent="16"
           inlineCollapsed={isMini}
-          selectedKeys={getSelectKeys(this.props,menusData)}
+          selectedKeys={getSelectKeys(this.props, menusData)}
           openKeys={openKeys}
           onOpenChange={this._handleToggle}
           onClick={this._handleClick}

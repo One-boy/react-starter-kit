@@ -11,6 +11,9 @@
 - 开发：npm start
 - 打包：npm run build
 
+### 使用说明
+- 样式：预编译采用`Less`，模块化启用了`cssModules`
+
 ### 目录文件介绍
 
 - .vscode  -- vscode编辑器相关配置
@@ -29,14 +32,14 @@
     - User -- 示例，用户类数据模拟
   - pages -- 存放页面业务逻辑
     - base --基础页面，如头部，左侧菜单
-    - login  --登陆页面
-    - test -- 示例页面
+    - login  --登录页面
+    - list -- 列表页
+    - single -- 独立页
   - resource -- 存放资源文件，如图片，视频等
   - style --  存放样式
     - base.less --基础样式，公共样式
-    - index.less -- 样式统一入口
     - theme -- 主题目录，定义一些公共样式
-    - login --登陆页面样式
+    - login --登录页面样式
   - utils -- 存放公用工具
     - ajax.js --ajax实现，采用`axios`库
   - client.js -- 入口文件

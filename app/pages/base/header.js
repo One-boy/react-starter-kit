@@ -14,6 +14,7 @@ import {
 import { Modal, message } from 'antd'
 import { title } from '@/config/base'
 import AJAXUser from '@/api/User'
+import styles from '@/style/header/index.less'
 
 @withRouter
 class Header extends Component {
@@ -47,14 +48,14 @@ class Header extends Component {
       name: 'admin'
     }
     return (
-      <header className="main-header">
-        <Link to="/" className="header-brand">
-          <span className="logo" />
-          <span className="brand-text">{title}</span>
+      <header className={styles.header}>
+        <Link to="/" className={styles.brand}>
+          <span className={styles.logo} />
+          <span className={styles.text}>{title}</span>
         </Link>
-        <div className="header-user">
-          <span className="header-user-name">{userInfo.name}</span>
-          <a onClick={this.onLogout} title="退出系统" className="header-user-logout">退出</a>
+        <div className={styles.user}>
+          <span >{userInfo.name}</span>
+          <a onClick={this.onLogout} title="退出系统" className={styles.userLogout}>退出</a>
         </div>
       </header>
     )

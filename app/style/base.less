@@ -1,65 +1,68 @@
 // 基础样式
+@import './theme/index';
 
-html,
-body,
-#root {
-  height: 100%;
-}
+// css modules 全局
+:global {
 
-* {
-  box-sizing: border-box;
-}
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
 
-// input, textarea, img, video, object {
-//   box-sizing: border-box;
-// }
+  * {
+    box-sizing: border-box;
+  }
 
-canvas {
-  display: block;
-}
+  // input, textarea, img, video, object {
+  //   box-sizing: border-box;
+  // }
 
-body {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  canvas {
+    display: block;
+  }
 
-ul,
-ol {
-  list-style: none;
-}
+  body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-.ant-table-header {}
+  ul,
+  ol {
+    list-style: none;
+  }
 
-// 自定义icon
-.qqbicon {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  background-color: transparent;
-  background-image: url(../resource/image/icon/module.png);
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-
-// 收缩控制器
-.qqbicon-navcontrol {
-  background-image: url(../resource/image/icon/navcontrol.png);
-}
+  // 自定义icon
+  .qqbicon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: transparent;
+    background-image: url(../resource/image/icon/module.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
 
 
-.main-wrap {
-  height: 100%;
-}
+  // 收缩控制器
+  .qqbicon-navcontrol {
+    background-image: url(../resource/image/icon/navcontrol.png);
+  }
 
-.main-body {
-  height: calc(100% - @header-height);
-  display: flex;
-  flex-direction: row;
-}
 
-.main-body-content {
-  flex-grow: 1;
-  overflow: hidden;
+  .main-wrap {
+    height: 100%;
+  }
+
+  .main-body {
+    height: calc(100% - @header-height);
+    display: flex;
+    flex-direction: row;
+  }
+
+  .main-body-content {
+    flex-grow: 1;
+    overflow: hidden;
+  }
 }

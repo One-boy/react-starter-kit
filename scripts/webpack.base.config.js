@@ -41,9 +41,18 @@ const webpackConfigBase = {
       },
       {
         test: /\.(css|less)$/,
+        exclude: resolve('../node_modules'),
         use: [
           MiniCssExtractPlugin.loader,
           'happypack/loader?id=happyStyle',
+        ],
+      },
+      {
+        test: /\.(css|less)$/,
+        include: resolve('../node_modules'),
+        use: [
+          MiniCssExtractPlugin.loader,
+          'happypack/loader?id=happyStyleNoModules',
         ],
       },
       {
@@ -86,14 +95,44 @@ const webpackConfigBase = {
       loaders: [
         {
           loader: 'css-loader', options: {
+            modules: true, // 启用cssModules
             sourceMap: true,
             minimize: true, //这个需要注释，如果开启，则开发时样式sourcemap始终是最后一行。
+            localIdentName: '[path][name]__[local]--[hash:base64:5]', // 名字生成规则
           }
         },
         {
           loader: 'postcss-loader', options: {
             sourceMap: true,//为true,在样式追溯时，显示的是编写时的样式，为false，则为编译后的样式
           }
+        },
+        {
+          loader: 'less-loader',
+          options: {
+            sourceMap: true,
+            javascriptEnabled: true,
+            paths: [
+              resolve('../node_modules'),
+              resolve('../app/style'),
+            ]
+          }
+        }
+      ],
+      threadPool,
+      verbose: true,
+    }),
+    // happypack处理样式--无cssModules模式，用来处理antd less
+    new HappyPack({
+      id: 'happyStyleNoModules',
+      loaders: [
+        {
+          loader: 'css-loader', options: {
+            // sourceMap: true,
+            minimize: true, 
+          }
+        },
+        {
+          loader: 'postcss-loader',
         },
         {
           loader: 'less-loader',

@@ -11,6 +11,7 @@
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd'
 import AJAXUser from '@/api/User'
+import styles from '@/style/login/index.less'
 
 const FormItem = Form.Item
 
@@ -83,10 +84,10 @@ class Login extends Component {
     const { getFieldDecorator } = this.props.form
     const { isRegister, btnLoading, registerText } = this.state
     return (
-      <div className="login-wrap">
-        <div className="login-content">
+      <div className={styles.wrap}>
+        <div className={styles.content}>
           <h2>登录</h2>
-          <Form onSubmit={this.handleSubmit} className="login-form">
+          <Form onSubmit={this.handleSubmit} className={styles['login-form']}>
             {
               isRegister ?
                 <FormItem>
@@ -121,7 +122,7 @@ class Login extends Component {
                 <Checkbox>记住我</Checkbox>
               )}
               {/* <a className="login-form-forgot" href="">忘记密码</a> */}
-              <Button type="primary" htmlType="submit" className="login-form-button" loading={btnLoading}>
+              <Button type="primary" htmlType="submit" className={styles['login-form-button']} loading={btnLoading}>
                 {registerText === '登录' ? '注册' : '登录'}
               </Button>
               <a onClick={this.chanageRegister}>{registerText}</a>
