@@ -12,8 +12,8 @@ import {
   Link, withRouter,
 } from 'react-router-dom'
 import { Modal, message } from 'antd'
-import { title } from '@config/base'
-import AJAXUser from '@api/User'
+import { title } from '@/config/base'
+import AJAXUser from '@/api/User'
 
 @withRouter
 class Header extends Component {

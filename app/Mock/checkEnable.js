@@ -9,7 +9,7 @@
 // 检查mock是否启用
 // 如果启用，则不做操作，如果未启用，则执行http逻辑
 
-import { EnableMock } from '@config/base'
+import { EnableMock } from '@/config/base'
 
 function checkEnable(target, name, descriptor) {
   if (!EnableMock) {

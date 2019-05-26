@@ -10,7 +10,7 @@
 /* eslint  react/prop-types:0 */
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd'
-import AJAXUser from '@api/User'
+import AJAXUser from '@/api/User'
 
 const FormItem = Form.Item
 

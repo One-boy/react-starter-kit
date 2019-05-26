@@ -1,131 +1,35 @@
-
 // 基础样式
 
-html, body {
-  background-color: transparent;
-  font-family: @font-family;
-  font-size: @font-size-base;
-  color: @text-color;
-  overflow: hidden;
-  -webkit-font-smoothing: antialiased !important;
-}
-
+html,
+body,
 #root {
   height: 100%;
 }
 
-input, textarea, img, video, object {
+* {
   box-sizing: border-box;
 }
 
-table {
-  border-spacing: 0;
-  border-collapse: collapse;
-  table-layout: fixed
+// input, textarea, img, video, object {
+//   box-sizing: border-box;
+// }
+
+canvas {
+  display: block;
 }
 
-textarea {
-  padding: @space-sm;
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-table tr td, table tr th {
-  text-align: center;
-  padding: @space-base;
-  line-height: normal;
+ul,
+ol {
+  list-style: none;
 }
 
-table tr td .ant-select {
-  width: 100%;
-}
-
-table tr td a {
-  padding: 0 @space-sm;
-}
-
-h1, .h1 {
-  font-size: @font-size-hg;
-}
-
-h2, .h2 {
-  font-size: @font-size-hg;
-}
-
-h3, .h3 {
-  font-size: @font-size-lg;
-}
-
-h4, .h4 {
-  font-size: @font-size-lg;
-}
-
-h5, .h5 {
-  font-size: @font-size-base;
-}
-
-h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5, {
-  font-weight: 600;
-}
-
-::selection {
-  background-color: rgba(46, 165, 204, 0.41);
-  color: inherit !important;
-}
-
-.left, .fl {
-  float: left;
-  text-align: left;
-}
-
-.right, .fr {
-  float: right;
-}
-
-.hide, .hide.ant-btn {
-  display: none;
-}
-
-.red, .error {
-  color: @error-color;
-}
-
-.info {
-  color: @info-color;
-}
-
-.yellow {
-  color: @warning-color;
-}
-
-.green, .success {
-  color: @success-color;
-}
-
-.orange {
-  color: @orange;
-}
-
-.highlight, .blue {
-  color: @blue;
-}
-
-a {
-  color: @primary-color;
-  &:focus {
-    text-decoration: none;
-  }
-}
-
-ul li, dl dt {
-  list-style: none
-}
-
-// 去除number型输入框的上下箭头
-input[type=number] {
-  &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-}
+.ant-table-header {}
 
 // 自定义icon
 .qqbicon {
@@ -133,168 +37,29 @@ input[type=number] {
   width: 18px;
   height: 18px;
   background-color: transparent;
-  background-image: url(../resource/image/default.png);
+  background-image: url(../resource/image/icon/module.png);
   background-repeat: no-repeat;
   background-position: center center;
-  vertical-align: middle;
-  margin-right: 10px;
 }
 
-.@{qqbicon-prefix}-desk {
-  background-image: url(../resource/image/desk.png);
-}
-
-.@{qqbicon-prefix}-module {
-  background-image: url(../resource/image/module.png);
-}
 
 // 收缩控制器
 .qqbicon-navcontrol {
-  background-image: url(../resource/image/navcontrol.png);
+  background-image: url(../resource/image/icon/navcontrol.png);
 }
 
-// 公共样式
+
 .main-wrap {
   height: 100%;
 }
 
 .main-body {
-  height: calc(~'100% - 64px');
+  height: calc(100% - @header-height);
   display: flex;
+  flex-direction: row;
 }
-
-/*
-公共头部样式 start
-*/
-
-.main-header {
-  height: @g-header-height;
-  line-height: @g-header-height;
-  background-color: @g-header-bg-color;
-  padding: 0 @space-normal;
-  display: flex;
-  justify-content: space-between;
-  .header-brand {
-    // 头部logo区域
-    display: flex;
-    align-items: center;
-    .logo {
-      display: inline-block;
-      color: #fff;
-      width: 28px;
-      height: 27px;
-      background: url(../resource/image/logo.jpg) no-repeat 0 0;
-      vertical-align: middle;
-      margin-right: @space-sm;
-    }
-    .brand-text {
-      color: @g-title-bg-color;
-      font-size: @font-size-hg;
-      letter-spacing: 5px;
-      transition: color 500ms ease-out;
-      &:hover {
-        color: @text-color-secondary;
-      }
-    }
-  }
-  .header-user {
-    color: @g-title-bg-color;
-    display: flex;
-    align-items: center;
-    margin-right: @space-normal;
-    .header-user-name {
-      margin-right: @space-normal;
-    }
-    .header-user-logout {
-      color: @g-title-bg-color;
-      &:hover {
-        color: @text-color-secondary;
-      }
-    }
-  }
-}
-
-/*
-公共头部样式 end
-*/
-
-/*
-左侧导航栏样式 start
-*/
-
-.main-body-nav {
-  width: @g-left-width-base;
-  height: 100%;
-  background-color: @nav-background;
-  transition: all 250ms;
-  overflow: hidden;
-  flex-shrink: 0;
-  .LeftNav-control {
-    background-color: #4A5064;
-    text-align: center;
-    height: 30px;
-    line-height: 30px;
-    cursor: pointer;
-    .qqbicon {
-      margin: 0;
-    }
-    &:hover {
-      background-color: #4c577b;
-    }
-  }
-  .ant-menu-item, .ant-menu-submenu-title {
-    padding-left: 12px !important;
-    margin: 0px;
-  }
-  .ant-menu .ant-menu-submenu-title {
-    background-color: rgb(66, 72, 91);
-  }
-  .ant-menu-inline.ant-menu-sub {
-    background-color: rgb(51, 55, 69);
-  }
-  .ant-menu-item-selected {
-    background-color: @blue  !important;
-  }
-  .menu-name {
-    visibility: visible;
-    color: @white;
-    font-size: @font-size-base;
-    transition: all 250ms ease-out;
-  }
-}
-
-.main-body-nav.nav-mini {
-  width: @g-left-width-mini ;
-  .menu-name {
-    visibility: hidden;
-    color: @white;
-  }
-  .ant-menu-vertical>.ant-menu-submenu>.ant-menu-submenu-title {
-    padding: 0 15px !important
-  }
-}
-
-/*
-左侧导航栏样式 end
-*/
-
-/*
-内容区样式 start
-*/
 
 .main-body-content {
-  flex: auto; // background-color: antiquewhite;
-}
-
-/*
-内容区样式 end
-*/
-
-/*
-404
-*/
-
-.nofound-wrap {
-  margin-top: @space-big;
-  text-align: center;
+  flex-grow: 1;
+  overflow: hidden;
 }

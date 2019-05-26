@@ -29,14 +29,7 @@ const webpackConfigBase = {
     extensions: ['.js', '.json'],
     // 文件引用路径替换，加@区别于node_modules库
     alias: {
-      '@style': resolve('../app/style'),
-      '@api': resolve('../app/api'),
-      '@resource': resolve('../app/resource'),
-      '@components': resolve('../app/components'),
-      '@config': resolve('../app/config'),
-      '@pages': resolve('../app/pages'),
-      '@utils': resolve('../app/utils'),
-      '@Mock': resolve('../app/Mock'),
+      '@': resolve('../app'),
     },
   },
   module: {

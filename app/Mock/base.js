@@ -7,19 +7,23 @@
 
 // mock base 类
 
-import { returnStatus } from '@config/code'
-import { toLoginPage } from '@utils/index'
+import { returnStatus } from '@/config/code'
+import { toLoginPage } from '@/utils/index'
 import {
   message
 } from 'antd'
 
 // mock
-function mock(resp) {
+/**
+ * @param resolve 回调解决
+ * @param timeout 接口超时时间
+ */
+function mock(resp, timeout = 0) {
   return new Promise((resolve, reject) => {
     switch (resp.status) {
       case returnStatus.NORMAL:
         // 正常数据
-        resolve(resp)
+        setTimeout(() => { resolve(resp) }, timeout)
         break
       case returnStatus.NOT_LOGIN:
         message.warn(resp.msg || '登录过期，即将跳转登录页...', 2, () => {

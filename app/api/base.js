@@ -7,9 +7,9 @@
 
 // api父类
 
-import * as ajax from '@utils/ajax'
-import { returnStatus } from '@config/code'
-import { toLoginPage } from '@utils/index'
+import * as ajax from '@/utils/ajax'
+import { returnStatus } from '@/config/code'
+import { toLoginPage } from '@/utils/index'
 import {
   message
 } from 'antd'

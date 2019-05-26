@@ -6,8 +6,8 @@
  */
 
 // mock数据
-import mock from '@Mock/base'
-import checkEnable from '@Mock/checkEnable'
+import mock from '@/Mock/base'
+import checkEnable from '@/Mock/checkEnable'
 
 class User {
 

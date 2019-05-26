@@ -1,0 +1,21 @@
+// 左侧菜单样式
+
+.main-body-nav{
+  width: 160px;
+  flex-shrink: 0;
+  border-right:1px solid #e9e9e9;
+  transition: width 150ms linear;
+  overflow: hidden;
+  background: #001529;
+  &.nav-mini{
+    width: 81px;
+  }
+  .nav-control{
+    height: 40px;
+    background: #002242;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}

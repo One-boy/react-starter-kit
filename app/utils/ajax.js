@@ -3,7 +3,7 @@ import {
   prefix,
   suffix,
   timeout
-} from '@config/base'
+} from '@/config/base'
 
 
 // axios配置

@@ -5,16 +5,16 @@
  * @Last Modified time: 2019-05-05 18:11:13
  */
 
-//tab2
+//tab3
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-export default class Tab2 extends Component {
+export default class Tab3 extends Component {
   constructor(props) {
     super(props)
     this.style = {
-      height: '100%',
+   
       paddingTop: 30,
     }
   }
@@ -22,7 +22,7 @@ export default class Tab2 extends Component {
   render() {
     return (
       <div style={this.style}>
-        <h3>tab2</h3>
+        <h3>tab3</h3>
       </div>
     )
   }

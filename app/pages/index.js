@@ -13,8 +13,8 @@ import {
   Switch,
   Route,
 } from 'react-router-dom'
-import Base from '@pages/base/index'
-import Login from '@pages/login'
+import Base from '@/pages/base/index'
+import Login from '@/pages/login'
 
 export default class Index extends Component {
   constructor(props) {

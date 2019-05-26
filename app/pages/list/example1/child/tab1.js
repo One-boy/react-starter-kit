@@ -9,14 +9,13 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { httpUpload } from '@api/base'
+import { httpUpload } from '@/api/base'
 
 export default class Tab1 extends Component {
   constructor(props) {
     super(props)
     this.state = {}
     this.style = {
-      height: '100%',
       paddingTop: 30,
     }
   }

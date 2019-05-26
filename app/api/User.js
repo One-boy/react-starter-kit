@@ -1,5 +1,5 @@
 
-import Mock from '@Mock'
+import Mock from '@/Mock'
 import Base from './base'
 
 class User extends Base {

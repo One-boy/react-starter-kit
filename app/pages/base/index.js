@@ -3,17 +3,17 @@
  */
 /* eslint  react/prop-types:0 */
 import React, { Component } from 'react'
-import Transition from '@components/transition'
 import {
   Route,
-  Redirect,
   Switch,
 } from 'react-router-dom'
 
 import Header from './header'
 import Nav from './nav'
 import NOTFOUND from './notfound'
-import test from '@pages/test/index'
+import example1 from '@/pages/list/example1'
+import example2 from '@/pages/list/example2'
+import single from '@/pages/single'
 
 export default class home extends Component {
 
@@ -31,8 +31,9 @@ export default class home extends Component {
           <Nav />
           <div className="main-body-content">
             <Switch>
-              <Route path="/basePage/page1" component={test.test1} />
-              {/* <Redirect to="/test1" /> */}
+              <Route path="/list/example1" component={example1} />
+              <Route path="/list/example2" component={example2} />
+              <Route path="/single" component={single} />
               <Route component={NOTFOUND} />
             </Switch>
           </div>

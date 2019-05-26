@@ -4,29 +4,8 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "paths": {
-      "@api/*": [
-        "app/api/*"
-      ],
-      "@resource/*": [
-        "app/resource/*"
-      ],
-      "@components/*": [
-        "app/components/*"
-      ],
-      "@config/*": [
-        "app/config/*"
-      ],
-      "@pages/*": [
-        "app/pages/*"
-      ],
-      "@utils/*": [
-        "app/utils/*"
-      ],
-      "@style/*": [
-        "app/style/*"
-      ],
-      "@Mock/*": [
-        "app/Mock/*"
+      "@/*": [
+        "app/*"
       ]
     }
   },
