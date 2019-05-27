@@ -10,6 +10,10 @@ class List extends Base {
     return await this.ajaxPost('/list/list2', reqData)
   }
 
+  // 上传文件
+  static async upload(reqData) {
+    return await this.ajaxPost('/list/upload', reqData)
+  }
 
 }
 

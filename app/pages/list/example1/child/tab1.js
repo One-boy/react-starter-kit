@@ -9,7 +9,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { httpUpload } from '@/api/base'
+import { upload as httpUpload } from '@/api/List'
 
 export default class Tab1 extends Component {
   constructor(props) {
@@ -23,21 +23,19 @@ export default class Tab1 extends Component {
   /**
  * 文件变化
  */
-  onFileChange = (e) => {
+  onFileChange = async (e) => {
     const files = e.target.files
     if (files.length) {
       let file = files[0]
       const fd = new FormData()
       fd.append('file', file)
       fd.append('fileName', file.name)
-      httpUpload(fd, res => {
-        console.log(res)
-        if (res.data && res.data.imgFullUrl) {
-          this.setState({
-            imgUrl: res.data.imgFullUrl,
-          })
-        }
-      })
+      let data = await httpUpload(fd)
+      if (data) {
+        this.setState({
+          imgUrl: data.imgFullUrl,
+        })
+      }
     }
   }
 
