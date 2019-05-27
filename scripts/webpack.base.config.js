@@ -30,6 +30,7 @@ const webpackConfigBase = {
     // 文件引用路径替换，加@区别于node_modules库
     alias: {
       '@': resolve('../app'),
+      '@ant-design/icons/lib/dist$': resolve('../app/icons.js'), // 解决ant把icon全部打入的问题，需要的icon在icons.js中加入
     },
   },
   module: {
@@ -128,7 +129,7 @@ const webpackConfigBase = {
         {
           loader: 'css-loader', options: {
             // sourceMap: true,
-            minimize: true, 
+            minimize: true,
           }
         },
         {

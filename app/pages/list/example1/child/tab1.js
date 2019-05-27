@@ -9,7 +9,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { upload as httpUpload } from '@/api/List'
+import AJAXList from '@/api/List'
 
 export default class Tab1 extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ export default class Tab1 extends Component {
       const fd = new FormData()
       fd.append('file', file)
       fd.append('fileName', file.name)
-      let data = await httpUpload(fd)
+      let data = await AJAXList.upload(fd)
       if (data) {
         this.setState({
           imgUrl: data.imgFullUrl,

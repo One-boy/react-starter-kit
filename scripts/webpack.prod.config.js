@@ -11,6 +11,7 @@ const path = require('path')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const Copy = require('copy-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const webpackConfigProd = {
   mode: 'production',
@@ -25,7 +26,9 @@ const webpackConfigProd = {
       //打包前删除文件夹
       cleanOnceBeforeBuildPatterns: [path.join(__dirname, '../dist')],
       verbose: false, //是否报告已删除的文件
-    })
+    }),
+    // 分析代码构成
+    new BundleAnalyzer({ analyzerPort: 3001 }),
   ],
 }
 
