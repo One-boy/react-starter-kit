@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import {
   Route,
   Switch,
+  Redirect,
 } from 'react-router-dom'
 
 import Header from './header'
@@ -34,6 +35,7 @@ export default class home extends Component {
               <Route path="/list/example1" component={example1} />
               <Route path="/list/example2" component={example2} />
               <Route path="/single" component={single} />
+              <Redirect from="/" to="/list/example1" />
               <Route component={NOTFOUND} />
             </Switch>
           </div>
