@@ -45,6 +45,7 @@
   - utils -- 存放公用工具
     - ajax.js --ajax实现，采用`axios`库
   - client.js -- 入口文件
+  - icons.js -- antd的icon文件手动引入
   - index.html -- html模板文件
 - scripts -- webpack打包工具配置脚本
 - .babelrc.js -- babel配置文件，版本babel>=7
@@ -58,3 +59,8 @@
 
 ### 其它说明
 - 有什么建议或问题随时和我交流
+- 使用到的vscode插件：  
+  - 文件头部修改信息：`vscode-fileheader`
+  - `ESLint`
+  - `CSS Modules`
+  - `Beautify css/sass/scss/less`

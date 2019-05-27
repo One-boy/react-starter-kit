@@ -1,4 +1,6 @@
 {
     "git.ignoreLimitWarning": true,
-    "javascript.implicitProjectConfig.experimentalDecorators": true
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+    "fileheader.Author": "huyu",
+    "fileheader.LastModifiedBy": "huyu"
 }
