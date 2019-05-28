@@ -15,6 +15,7 @@
 - 样式：预编译采用`Less`，模块化启用了`cssModules`
 - 测试：单元测试使用`jest+enzyme`，e2e（端到端）测试使用`jest+puppeteer`
    - 运行命令：`npm run test:js`和`npm run test:ui`
+- 代码分隔：支持通过`React.lazy和Suspense`方式组件实现动态导入
 
 ### 目录文件介绍
 
