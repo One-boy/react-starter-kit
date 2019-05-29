@@ -24,6 +24,10 @@ export {
   default as LoadingOutline
 } from '@ant-design/icons/lib/outline/LoadingOutline'
 
+// down，主要用于分页器下拉
+export {
+  default as DownOutline
+} from '@ant-design/icons/lib/outline/DownOutline'
 
 // 检查正确，成功,check circle，主要用于message.success
 export {
