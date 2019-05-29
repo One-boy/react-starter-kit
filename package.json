@@ -8,7 +8,8 @@
     "build": "webpack --config ./scripts/webpack.prod.config.js",
     "creatDll": "webpack --config ./scripts/webpack.dll.config.js",
     "test:js": "jest  --testRegex '*.test.js",
-    "test:ui": "jest  --testRegex '*.e2e.js --runInBand"
+    "test:ui": "jest  --testRegex '*.e2e.js --runInBand",
+    "huskyInstall": "node ./node_modules/husky/lib/installer/bin.js install"
   },
   "author": "",
   "license": "ISC",

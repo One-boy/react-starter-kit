@@ -1,8 +1,8 @@
 /*
  * @Author: hy 
  * @Date: 2019-05-05 17:47:31 
- * @Last Modified by:   hy 
- * @Last Modified time: 2019-05-05 17:47:31 
+ * @Last Modified by: huyu
+ * @Last Modified time: 2019-05-29 16:27:01
  */
 
 // 左侧导航
@@ -14,13 +14,14 @@ import PropTypes from 'prop-types'
 import {
   withRouter,
 } from 'react-router-dom'
-import styles from '@/style/menu/index.less'
+import '@/style/menu/index.less'
 import { getOpenKeys, getSelectKeys } from './navUtils'
 
 const SubMenu = Menu.SubMenu
 
 @withRouter
-export default class Nav extends Component {
+
+class Nav extends Component {
 
   constructor(props) {
     super(props)
@@ -153,3 +154,5 @@ export default class Nav extends Component {
     )
   }
 }
+
+export default Nav
