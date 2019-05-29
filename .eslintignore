@@ -3,3 +3,4 @@
 *.test.js
 jest*.js
 puppeteer*.js
+webpack*
