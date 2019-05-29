@@ -2,7 +2,7 @@
  * @Author: huyu
  * @Date: 2019-05-28 10:12:29
  * @Last Modified by: huyu
- * @Last Modified time: 2019-05-28 12:02:29
+ * @Last Modified time: 2019-05-29 14:12:58
  */
 
 // 错误边界组件
@@ -13,6 +13,7 @@ import React, { Component } from 'react'
 import { Row, Col, Button, Card } from 'antd'
 import Proptypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
+
 
 @withRouter
 export default class ErrorBoundary extends Component {
@@ -27,9 +28,6 @@ export default class ErrorBoundary extends Component {
     children: Proptypes.object,
   }
 
-  static getDerivedStateFromProps(props, state) {
-    console.log(state.hasError)
-  }
 
   static getDerivedStateFromError(error) {
     return { hasError: true }

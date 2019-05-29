@@ -96,6 +96,7 @@ const webpackConfigBase = {
       loaders: [
         {
           loader: 'css-loader', options: {
+            importLoaders: 2, // 之前有2个loaders
             modules: true, // 启用cssModules
             sourceMap: true,
             minimize: true, //这个需要注释，如果开启，则开发时样式sourcemap始终是最后一行。
@@ -103,7 +104,9 @@ const webpackConfigBase = {
           }
         },
         {
-          loader: 'postcss-loader', options: {
+          loader: 'postcss-loader',
+          options: {
+            ident: 'postcss',
             sourceMap: true,//为true,在样式追溯时，显示的是编写时的样式，为false，则为编译后的样式
           }
         },
@@ -113,7 +116,6 @@ const webpackConfigBase = {
             sourceMap: true,
             javascriptEnabled: true,
             paths: [
-              resolve('../node_modules'),
               resolve('../app/style'),
             ]
           }
@@ -142,7 +144,6 @@ const webpackConfigBase = {
             javascriptEnabled: true,
             paths: [
               resolve('../node_modules'),
-              resolve('../app/style'),
             ]
           }
         }
