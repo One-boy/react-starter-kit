@@ -36,6 +36,10 @@ const webpackConfigBase = {
   module: {
     rules: [
       {
+        test: /\.worker\.js$/,
+        use: { loader: 'worker-loader' }
+      },
+      {
         exclude: /node_modules/,
         test: /\.(js|jsx)$/,
         use: 'happypack/loader?id=happyBabel',

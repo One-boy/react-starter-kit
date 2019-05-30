@@ -15,6 +15,7 @@ import NOTFOUND from './notfound'
 // import example1 from '@/pages/list/example1'
 import example2 from '@/pages/list/example2'
 import single from '@/pages/single'
+import worker from '@/pages/worker'
 
 // 动态导入
 const example1 = React.lazy(() => import('@/pages/list/example1'))
@@ -40,6 +41,7 @@ export default class home extends Component {
                   <Route path="/list/example1" component={example1} />
                   <Route path="/list/example2" component={example2} />
                   <Route path="/single" component={single} />
+                  <Route path="/worker" component={worker} />
                   <Redirect from="/" to="/list/example1" />
                   <Route component={NOTFOUND} />
                 </Switch>

@@ -50,6 +50,11 @@ const menusData = [
     navKey: '/single',
     navIcon: 'desk',
   },
+  {
+    navName: 'WebWorkers',
+    navKey: '/worker',
+    navIcon: 'desk',
+  },
 ]
 
 export {
