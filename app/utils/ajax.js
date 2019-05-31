@@ -4,7 +4,8 @@ import {
   suffix,
   timeout
 } from '@/config/base'
-
+import { addCancelFunc, cancelRequest } from './ajaxCancel'
+import { checkResponse } from './ajaxUtil'
 
 // axios配置
 const axiosBaseConfig = {
@@ -50,7 +51,7 @@ axiosInstance.interceptors.request.use(req => req, error =>
   // 当请求错误时
   Promise.reject(error))
 
-axiosInstance.interceptors.response.use(resp => resp, (error) => {
+axiosInstance.interceptors.response.use(resp => checkResponse(resp), (error) => {
   // 当返回错误时
   if (axios.isCancel(error)) {
     throw ({ message: '请求被取消' })
@@ -70,11 +71,13 @@ axiosInstance.interceptors.response.use(resp => resp, (error) => {
 const axiosPost = (url, config, reqData) => {
   const CancelToken = axios.CancelToken
   const source = CancelToken.source()
+  addCancelFunc(reqData, source.cancel)
   return axiosInstance.post(url, reqData, {
     cancelToken: source.token,
     ...config,
   })
     .then((resp) => {
+      cancelRequest(reqData)
       return resp.data
     })
 }
@@ -83,7 +86,7 @@ const axiosPost = (url, config, reqData) => {
 const axiosGet = (url, config, reqData) => {
   const CancelToken = axios.CancelToken
   const source = CancelToken.source()
-
+  addCancelFunc(reqData, source.cancel)
   let reqArray = []
   Object.keys(reqData).forEach(key => {
     reqArray.push(`${key}=${encodeURIComponent(reqData[key])}`)
@@ -94,7 +97,10 @@ const axiosGet = (url, config, reqData) => {
     cancelToken: source.token,
     ...config,
   })
-    .then((resp) => resp.data)
+    .then((resp) => {
+      cancelRequest(reqData)
+      return resp.data
+    })
 }
 
 

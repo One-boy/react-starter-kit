@@ -5,14 +5,14 @@
 
 
 // 本地开发打开的路径以及端口
-let httpUrl = 'http://41.196.99.48:8080/data'
+let httpUrl = 'http://127.0.0.1:8080/data'
 
 // 启用Mock
 let EnableMock = true
 
 // 生产环境用不同的接口地址
 if (process.env.NODE_ENV === 'production') {
-  httpUrl = 'http://41.196.99.48:8080/data'
+  httpUrl = 'http://127.0.0.1:8080/data'
   EnableMock = false
 }
 

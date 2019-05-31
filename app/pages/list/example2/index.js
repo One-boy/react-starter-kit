@@ -1,8 +1,8 @@
 /*
  * @Author: hy 
  * @Date: 2019-05-05 17:48:17 
- * @Last Modified by: hy
- * @Last Modified time: 2019-05-06 10:46:53
+ * @Last Modified by: huyu
+ * @Last Modified time: 2019-05-31 14:19:59
  */
 
 // 测试页
@@ -10,11 +10,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, Icon, Button, Card, Table, Pagination } from 'antd'
-import { Route, Redirect, Switch } from 'react-router-dom'
 import AJAXList from '@/api/List'
+import { cancelRequest } from '@/utils/ajaxCancel'
 
 @Form.create({})
-export default class test1 extends Component {
+class test1 extends Component {
 
   constructor(props) {
     super(props)
@@ -32,12 +32,15 @@ export default class test1 extends Component {
     this.style = {
       height: '100%',
     }
+    //canceltoken
+    this.CANCEL_TOKEN = 'list/list2'
     // 请求字段
     this.requestBody = {
       pageSize: 10,
       pageNo: 1,
       name: '',
       idCard: '',
+      AJAX_CANCEL_TOKEN: this.CANCEL_TOKEN
     }
   }
 
@@ -45,6 +48,7 @@ export default class test1 extends Component {
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
+    form: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
@@ -54,7 +58,7 @@ export default class test1 extends Component {
   // 获取列表
   getList = async () => {
     this.setState({ tableLoading: true })
-    let res = await AJAXList.list2(this.requestBody).catch(err => {
+    let res = await AJAXList.list2(this.requestBody).catch(() => {
       this.setState({ tableLoading: false })
     })
 
@@ -92,9 +96,14 @@ export default class test1 extends Component {
   }
 
   // 页数变化
-  onChangePageNo = (current, size) => {
+  onChangePageNo = (current) => {
     this.requestBody.pageNo = current
     this.getList()
+  }
+
+  // 取消请求
+  onClickCancel = () => {
+    cancelRequest(this.CANCEL_TOKEN)
   }
 
   // 获取头部
@@ -135,7 +144,7 @@ export default class test1 extends Component {
 
 
   render() {
-    const { getFieldDecorator, getFieldsError } = this.props.form
+    const { getFieldDecorator } = this.props.form
     const { tableData, tableLoading } = this.state
     return (
       <div style={this.style}>
@@ -171,6 +180,11 @@ export default class test1 extends Component {
                 重置
               </Button>
             </Form.Item>
+            <Form.Item>
+              <Button onClick={this.onClickCancel} >
+                取消请求
+              </Button>
+            </Form.Item>
           </Form>
 
           <div style={{ marginTop: 12 }}>
@@ -188,7 +202,6 @@ export default class test1 extends Component {
               style={{ marginTop: 12, textAlign: 'right' }}
               total={tableData.total}
               showTotal={total => `共 ${total} 条`}
-              pageSize={tableData.pageSize}
               current={tableData.pageNo}
               onShowSizeChange={this.onShowSizeChange}
               onChange={this.onChangePageNo}
@@ -199,3 +212,5 @@ export default class test1 extends Component {
     )
   }
 }
+
+export default test1
