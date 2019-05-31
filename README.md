@@ -17,7 +17,7 @@
 - 测试：单元测试使用`jest+enzyme`，e2e（端到端）测试使用`jest+puppeteer`
    - 运行命令：`npm run test:js`和`npm run test:ui`
 - 代码分隔：支持通过`React.lazy和Suspense`方式组件实现动态导入
-- dll化：一些长久不变的包，使用了dll静态化，如果`app/resource/dll`下没有文件，则执行`npm run creatDll`创建，再`npm start`启动项目
+- dll化：一些长久不变的包，使用了dll静态化，如果`app/resource/dll`下没有文件，则执行`npm run createDll`创建，再`npm start`启动项目
 
 ### 目录文件介绍
 

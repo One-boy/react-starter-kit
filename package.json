@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./scripts/webpack.dev.config.js",
     "build": "webpack --config ./scripts/webpack.prod.config.js",
-    "creatDll": "webpack --config ./scripts/webpack.dll.config.js",
+    "createDll": "webpack --config ./scripts/webpack.dll.config.js",
     "test:js": "jest  --testRegex '*.test.js",
     "test:ui": "jest  --testRegex '*.e2e.js --runInBand",
     "huskyInstall": "node ./node_modules/husky/lib/installer/bin.js install"
