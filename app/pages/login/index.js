@@ -2,16 +2,17 @@
  * @Author: hy 
  * @Date: 2019-05-05 17:48:01 
  * @Last Modified by: huyu
- * @Last Modified time: 2019-05-29 14:16:12
+ * @Last Modified time: 2019-06-02 15:26:59
  */
 
 // 登录
 
 /* eslint  react/prop-types:0 */
 import React, { Component } from 'react'
-import { Form, Icon, Input, Button, Checkbox, message } from 'antd'
+import { Form, Icon, Input, Button, Checkbox } from 'antd'
 import AJAXUser from '@/api/User'
 import styles from '@/style/login/index.less'
+import classNames from 'classnames'
 
 const FormItem = Form.Item
 
@@ -84,7 +85,7 @@ class Login extends Component {
     const { getFieldDecorator } = this.props.form
     const { isRegister, btnLoading, registerText } = this.state
     return (
-      <div className={styles.wrap}>
+      <div className={classNames(styles.wrap, styles.wrap2, 'wrap3')}>
         <div className={styles.content}>
           <h2>登录</h2>
           <Form onSubmit={this.handleSubmit} className={styles['login-form']}>
