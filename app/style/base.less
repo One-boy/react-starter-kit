@@ -61,4 +61,23 @@
     flex-grow: 1;
     overflow: hidden;
   }
+
+  .transform-show :local {
+    animation-name: circleShow;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes circleShow {
+    0% {
+      clip-path: circle(0);
+    }
+
+
+    100% {
+      clip-path: circle(100%);
+    }
+  }
 }

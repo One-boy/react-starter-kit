@@ -2,7 +2,7 @@
  * @Author: hy 
  * @Date: 2019-05-05 17:48:17 
  * @Last Modified by: huyu
- * @Last Modified time: 2019-05-31 14:19:59
+ * @Last Modified time: 2019-06-02 22:18:57
  */
 
 // 测试页
@@ -147,7 +147,7 @@ class test1 extends Component {
     const { getFieldDecorator } = this.props.form
     const { tableData, tableLoading } = this.state
     return (
-      <div style={this.style}>
+      <div style={this.style} className="transform-show">
         <Card bordered={false}>
           <Form layout="inline" onSubmit={this.handleSubmit}>
             <Form.Item >
