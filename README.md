@@ -11,6 +11,9 @@
 - 前提：npm run createDll  -- 执行dll静态化公共库
 - 开发：npm start
 - 打包：npm run build
+- 测试：
+  - js:npm run test:js
+  - ui：npm run test:ui
 
 ### 使用说明
 - 样式：预编译采用`Less`，模块化启用了`cssModules`
