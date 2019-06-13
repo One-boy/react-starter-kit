@@ -8,6 +8,8 @@
 ### 安装
 - git clone 本项目
 - npm install
+  - 注意：安装时会下载chrommium包，如果不需要下载：请使用环境变量`PUPPETEER_SKIP_CHROMIUM_DOWNLOAD`
+  - windows git bash使用：`export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1`，然后`npm install`
 - 前提：npm run createDll  -- 执行dll静态化公共库
 - 开发：npm start
 - 打包：npm run build
