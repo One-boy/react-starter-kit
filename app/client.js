@@ -12,7 +12,9 @@ import Index from './pages'
 
 // 全局store初始值
 const store = {}
-window.Blob = {}
+if (!window.Blob) {
+  window.Blob = {}
+}
 ReactDOM.render(
   <StoreProvider store={store}>
     <LocaleProvider locale={zh_CN}>
