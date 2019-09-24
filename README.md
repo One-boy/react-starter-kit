@@ -1,6 +1,6 @@
 # 基于react PC端的中后台开发基础脚手架
 ### 技术栈及环境
-- `react@16.x+webpack@4.x+antd@3.x+react-router@4.3.x`
+- `react@16.x+webpack@4.x+antd@3.x+react-router@5.x`
 - antd使用`babel-plugin-import`按需加载
 - `node v8.6.0`
 - `npm v5.3`
