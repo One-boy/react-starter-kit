@@ -11,7 +11,9 @@ const presets = [
                 "firefox": "28",
                 "safari": "6.1",
                 "ie": "9"
-            }
+            },
+            'useBuiltIns': 'entry',
+            corejs: 3
         }
     ],
     //jsx语法转换解析
