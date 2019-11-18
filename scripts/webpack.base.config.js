@@ -18,7 +18,7 @@ function resolve(p) {
 
 const webpackConfigBase = {
   entry: {
-    client: ['@babel/polyfill', resolve('../app/client.js')]
+    app: ['@babel/polyfill', resolve('../app/client.js')]
   },
   output: {
     path: resolve('../dist'),
@@ -174,8 +174,8 @@ const webpackConfigBase = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: 'style.[hash:4].css',
-      chunkFilename: '[id].css'
+      filename: 'styles/style.[hash:4].css',
+      chunkFilename: 'styles/[name]-[hash:4].css'
     }),
     // 去掉moment语言包
     // 使用的时候，则需要引入中文包，
@@ -183,6 +183,54 @@ const webpackConfigBase = {
     // moment.locale('zh-cn') // 设置为中文
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
+  // 分离较大的包，单独成一个文件
+  optimization: {
+    runtimeChunk: {
+      name: "runtime"
+    },
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        antd: {
+          test: /[\\/]node_modules[\\/](antd)[\\/]/,
+          name: 'antd',
+          priority: 10,
+          enforce: true,
+          filename: 'chunks/[name].js',
+        },
+        coreJs: {
+          test: /[\\/]node_modules[\\/](core-js)[\\/]/,
+          name: 'coreJs',
+          priority: 9,
+          enforce: true,
+          filename: 'chunks/[name].js',
+        },
+        rc: {
+          test: /[\\/]node_modules[\\/](rc-.*)[\\/]/,
+          name: 'rc',
+          priority: 11,
+          enforce: true,
+          filename: 'chunks/[name].js',
+        },
+        others: {
+          priority: 12,
+          test(mod) {
+            if (mod.resource) {
+              const include = [/[\\/]node_modules[\\/]/].every(reg => {
+                return reg.test(mod.resource);
+              })
+              const exclude = [/[\\/]node_modules[\\/](antd|core-js|rc-.*)[\\/]/].some(reg => {
+                return reg.test(mod.resource);
+              })
+              return include && !exclude
+            }
+            return false
+          },
+          name: 'others',
+        },
+      }
+    }
+  }
 }
 
 module.exports = webpackConfigBase
