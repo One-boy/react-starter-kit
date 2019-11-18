@@ -87,5 +87,11 @@
         "git add"
       ]
     }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "echo $HUSKY_GIT_PARAMS"
+    }
   }
 }
