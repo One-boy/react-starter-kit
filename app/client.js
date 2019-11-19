@@ -2,7 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ConfigProvider } from 'antd'
-import zh_CN from 'antd/lib/locale-provider/zh_CN'
+import zh_CN from 'antd/es/locale/zh_CN'
 import {
   HashRouter as Router,
 } from 'react-router-dom'
