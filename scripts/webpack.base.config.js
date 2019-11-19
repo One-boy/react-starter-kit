@@ -37,7 +37,7 @@ const webpackConfigBase = {
     rules: [
       {
         test: /\.worker\.js$/,
-        use: { loader: 'worker-loader' }
+        use: { loader: 'worker-loader', options: { name: 'workers/[name].[hash:4].js' } }
       },
       {
         exclude: /node_modules/,
