@@ -2,7 +2,7 @@
  * @Author: hy 
  * @Date: 2019-05-07 10:02:41 
  * @Last Modified by: huyu
- * @Last Modified time: 2019-05-31 14:10:26
+ * @Last Modified time: 2019-11-19 11:06:53
  */
 
 // api父类
@@ -26,7 +26,7 @@ class ApiBase {
 
   // ajax
   static _ajax(url, reqData, target, type) {
-    let func = type === 'post' ? ajax.createHttpPost : ajax.createHttpGet
+    let func = type === 'post' ? ajax.createHTTPPost : ajax.createHTTPGet
     return new Promise((resolve, reject) => {
       func(url, reqData, target).then(resp => resolve(resp)).catch(err => {
         message.warning(err.msg || err.message || '未知错误')

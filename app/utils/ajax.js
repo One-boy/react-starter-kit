@@ -8,11 +8,12 @@ import { addCancelFunc, cancelRequest } from './ajaxCancel'
 import { checkResponse } from './ajaxUtil'
 
 // axios配置
-const axiosBaseConfig = {
+const _axiosBaseConfig = {
   // baseURL: prefix,
   timeout: timeout,
   headers: {
-    'Content-Type': 'text/plain',
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    // 'Content-Type': 'text/plain',
     // 'Content-Type': 'application/json'
   },
   method: 'post',
@@ -22,13 +23,20 @@ const axiosBaseConfig = {
   // 默认是json，可选'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
   responseType: 'json', // default
   // http请求返回状态码检查
-  validateStatus: status =>
-    status >= 200 && status < 300, // default
+  validateStatus: status => (status >= 200 && status < 300), // default
   // 请求数据预处理
   transformRequest: [(data) => {
-    // 请求对象转换成jon字符串，formdata数据除外
+    // 针对需要json字符串参数得请求
+    // if (typeof data === 'object' && !(data instanceof FormData)) {
+    //   return JSON.stringify(data)
+    // }
+    // 针对x-www-form-urlencoded请求
     if (typeof data === 'object' && !(data instanceof FormData)) {
-      return JSON.stringify(data)
+      let reqArray = []
+      Object.keys(data).forEach(key => {
+        reqArray.push(`${key}=${encodeURIComponent(data[key])}`)
+      })
+      return reqArray.join('&')
     }
     return data
   }],
@@ -45,13 +53,11 @@ const axiosBaseConfig = {
   }],
 }
 // axios 实例
-const axiosInstance = axios.create(axiosBaseConfig)
+const axiosInstance = axios.create(_axiosBaseConfig)
 // 拦截器
-axiosInstance.interceptors.request.use(req => req, error =>
-  // 当请求错误时
-  Promise.reject(error))
+axiosInstance.interceptors.request.use(req => req, error => Promise.reject(error))
 
-axiosInstance.interceptors.response.use(resp => checkResponse(resp), (error) => {
+axiosInstance.interceptors.response.use(resp => checkResponse(resp.data), (error) => {
   // 当返回错误时
   if (axios.isCancel(error)) {
     throw ({ message: '请求被取消' })
@@ -68,22 +74,19 @@ axiosInstance.interceptors.response.use(resp => checkResponse(resp), (error) => 
   return Promise.reject(error)
 })
 
-const axiosPost = (url, config, reqData) => {
+const _axiosPost = async (url, config, reqData) => {
   const CancelToken = axios.CancelToken
   const source = CancelToken.source()
   addCancelFunc(reqData, source.cancel)
-  return axiosInstance.post(url, reqData, {
+  const resp = await axiosInstance.post(url, reqData, {
     cancelToken: source.token,
     ...config,
   })
-    .then((resp) => {
-      cancelRequest(reqData)
-      return resp.data
-    })
+  cancelRequest(reqData)
+  return resp.data
 }
 
-
-const axiosGet = (url, config, reqData) => {
+const _axiosGet = async (url, config, reqData) => {
   const CancelToken = axios.CancelToken
   const source = CancelToken.source()
   addCancelFunc(reqData, source.cancel)
@@ -93,42 +96,32 @@ const axiosGet = (url, config, reqData) => {
   })
   let newUrl = `${url}?${reqArray.join('&')}`
 
-  return axiosInstance.get(newUrl, {
+  const resp = await axiosInstance.get(newUrl, {
     cancelToken: source.token,
     ...config,
   })
-    .then((resp) => {
-      cancelRequest(reqData)
-      return resp.data
-    })
+  cancelRequest(reqData)
+  return resp.data
 }
 
-
-// post json字符串，即text/plain形式
-const createHttpPost = (url, reqData, target) => {
+// create url
+const _createUrl = (target, url) => {
   let newUrl
   if (target) {
     newUrl = `${target}${url}${suffix}`
   } else {
     newUrl = `${prefix}${url}${suffix}`
   }
-
-  return axiosPost(newUrl, {}, reqData)
+  return newUrl
 }
 
+// post
+const createHTTPPost = (url, reqData, target) => _axiosPost(_createUrl(target, url), {}, reqData)
 
-const createHttpGet = (url, reqData, target) => {
-  let newUrl
-  if (target) {
-    newUrl = `${target}${url}${suffix}`
-  } else {
-    newUrl = `${prefix}${url}${suffix}`
-  }
-
-  return axiosGet(newUrl, {}, reqData)
-}
+// get
+const createHTTPGet = (url, reqData, target) => _axiosGet(_createUrl(target, url), {}, reqData)
 
 export {
-  createHttpPost,
-  createHttpGet,
+  createHTTPPost,
+  createHTTPGet,
 }
