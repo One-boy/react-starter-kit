@@ -4,7 +4,6 @@
  */
 /* eslint no-undef:0 */
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HappyPack = require('happypack')
@@ -85,15 +84,6 @@ const webpackConfigBase = {
     ],
   },
   plugins: [
-    // dll
-    new webpack.DllReferencePlugin({
-      context: resolve('../'),
-      manifest: require('../app/resource/dll/react-manifest.json'),
-    }),
-    new webpack.DllReferencePlugin({
-      context: resolve('../'),
-      manifest: require('../app/resource/dll/other-manifest.json'),
-    }),
     // happypack处理js
     new HappyPack({
       id: 'happyBabel',
@@ -163,12 +153,6 @@ const webpackConfigBase = {
       ],
       threadPool,
       verbose: true,
-    }),
-    // 打包后的资源引用到html文件内
-    new HtmlWebpackPlugin({
-      template: resolve('../app/index.html'),
-      // 这里列出要加入html中的js文件
-      dlls: ['./resource/dll/dll.react.js', './resource/dll/dll.other.js'],
     }),
     // 提取css
     new MiniCssExtractPlugin({

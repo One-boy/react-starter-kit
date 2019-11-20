@@ -6,7 +6,9 @@
   "scripts": {
     "start": "webpack-dev-server --config ./scripts/webpack.dev.config.js",
     "build": "webpack --config ./scripts/webpack.prod.config.js",
-    "createDll": "webpack --config ./scripts/webpack.dll.config.js",
+    "createDllDev": "webpack --env.mode=development --config ./scripts/webpack.dll.config.js",
+    "createDllPro": "webpack --env.mode=production --config ./scripts/webpack.dll.config.js",
+    "createDll": "npm run createDllDev && npm run createDllPro",
     "test:js": "jest --config=jest-js.config.js",
     "test:ui": "jest --config=jest-ui.config.js --runInBand",
     "huskyInstall": "node ./node_modules/husky/lib/installer/bin.js install"
