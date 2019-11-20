@@ -2,7 +2,7 @@
  * @Author: huyu 
  * @Date: 2019-05-29 14:37:31 
  * @Last Modified by: huyu
- * @Last Modified time: 2019-11-20 16:55:30
+ * @Last Modified time: 2019-11-20 17:51:47
  */
 
 // dll 配置
@@ -10,7 +10,6 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = env => {
-  console.log('env=', env)
   return {
     mode: env.mode,
     resolve: {
