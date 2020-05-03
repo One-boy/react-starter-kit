@@ -2,7 +2,7 @@
  * @Author: hy 
  * @Date: 2019-05-05 17:48:17 
  * @Last Modified by: huyu
- * @Last Modified time: 2019-05-30 11:10:59
+ * @Last Modified time: 2020-05-03 11:21:58
  */
 
 // web workers示例
@@ -16,9 +16,9 @@ export default class Worker extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      //input value
+      // input value
       value: '',
-      //收到的消息
+      // 收到的消息
       text: '',
     }
     this.style = {
@@ -34,17 +34,17 @@ export default class Worker extends Component {
     }
   }
 
-  //onChange
+  // onChange
   onChange = (e) => {
     this.setState({ value: e.target.value })
   }
 
-  //接收消息
+  // 接收消息
   onMessage = (e) => {
     this.setState({ text: e.data })
   }
 
-  //发送消息
+  // 发送消息
   onClickSend = () => {
     const { value } = this.state
     console.log(value, this.worker)

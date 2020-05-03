@@ -1,25 +1,18 @@
 
 // 登录页测试
-import '@babel/polyfill'
-
-const loginUrl = 'http://localhost:8888/'
+import {
+  TIMEOUT,
+  LOG_DIR,
+  URL_PREFIX,
+} from './base'
 
 describe('Login', () => {
-  let page
   beforeAll(async () => {
-    page = await global.__BROWSER__.newPage()
-    jest.setTimeout(1000000)
-  })
-
-  beforeEach(async () => {
-    await page.goto(`${loginUrl}#/login`, { waitUntil: 'networkidle2' })
-
+    await page.goto(`${URL_PREFIX}/login`, { waitUntil: 'networkidle2' })
   })
 
   it('should login with failure', async () => {
-    await page.waitForSelector('#username', {
-      timeout: 2000,
-    })
+    await page.waitForSelector('#username')
     await page.type('#username', 'admin')
     await page.type('#password', '')
     await page.click('button[type="submit"]')
@@ -27,14 +20,13 @@ describe('Login', () => {
   })
 
   it('should login successfully', async () => {
-    await page.waitForSelector('#username', {
-      timeout: 2000,
-    })
+    await page.waitForSelector('#username')
     await page.type('#username', 'admin')
     await page.type('#password', '1')
     await page.click('button[type="submit"]')
-
+    // 截图
+    await page.screenshot({ path: `${LOG_DIR}/login.png`, type: 'png', fullPage: true })
     const text = await page.evaluate(() => document.body.innerHTML)
-    expect(text).toContain('中后台管理系统')
+    expect(text).toContain('中后台管理系统') // 登录成功并跳转后，页面应该包含该文本
   })
 })

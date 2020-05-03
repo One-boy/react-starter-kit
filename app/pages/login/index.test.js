@@ -2,7 +2,7 @@
  * @Author: huyu 
  * @Date: 2019-06-07 17:26:38 
  * @Last Modified by: huyu
- * @Last Modified time: 2019-06-07 19:54:55
+ * @Last Modified time: 2020-05-03 11:22:28
  */
 
 // 登录页测试
@@ -15,9 +15,7 @@ import { shallow, mount, render } from 'enzyme'
 import '@babel/polyfill'
 import Login from './index'
 
-
 Enzyme.configure({ adapter: new Adapter() })
-
 
 describe('Login component test', () => {
   it('should have h2 title', () => {

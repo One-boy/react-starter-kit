@@ -1,14 +1,13 @@
 /*
  * @Author: hy 
  * @Date: 2019-05-05 17:23:01 
- * @Last Modified by: hy
- * @Last Modified time: 2019-05-05 18:18:00
+ * @Last Modified by: huyu
+ * @Last Modified time: 2020-05-03 11:22:44
  */
 
-//tab1
+// tab1
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import AJAXList from '@/api/List'
 
 export default class Tab1 extends Component {
@@ -21,8 +20,8 @@ export default class Tab1 extends Component {
   }
 
   /**
- * 文件变化
- */
+  * 文件变化
+  */
   onFileChange = async (e) => {
     const files = e.target.files
     if (files.length) {

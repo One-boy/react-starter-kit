@@ -1,9 +1,9 @@
 # 基于react PC端的中后台开发基础脚手架
 ### 技术栈及环境
-- `react@16.x+webpack@4.x+antd@3.x+react-router@5.x`
+- `react@16.13.x+webpack@4.x+antd@3.x+react-router-dom@5.x`
 - antd使用`babel-plugin-import`按需加载
-- `node v8.6.0`
-- `npm v5.3`
+- `node v10.12.0`
+- `npm v6.4.1`
 
 ### 安装
 - git clone 本项目
@@ -19,7 +19,7 @@
 
 ### 使用说明
 - 样式：预编译采用`Less`，模块化启用了`cssModules`
-- 测试：单元测试使用`jest+enzyme`，e2e（端到端）测试使用`jest+puppeteer`
+- 测试：单元测试使用`jest+enzyme`，e2e（端到端）ui测试使用`jest+puppeteer`
    - 运行命令：`npm run test:js`和`npm run test:ui`
 - 代码分隔：支持通过`React.lazy和Suspense`方式组件实现动态导入
 - dll化：一些长久不变的包，使用了dll静态化，如果`app/resource/dll`下没有文件，则执行`npm run createDll`创建，再`npm start`启动项目
@@ -64,6 +64,12 @@
 ### 支持浏览器
 - 良好支持：**IE10+; EDGE;  chrome21+; safari6.1+;firefox28+**
 - 有少许问题，主要是老式`flexbox`语法问题:**IE9+; EDGE;  chrome4+; safari3.1+;firefox2+**
+
+### 关于测试
+#### e2e测试
+运行`npm run test:ui`前，需要确保`'./.local-chromium/win64-737027/chrome-win/chrome.exe'`有这个路径，没有的话，可以联系我或者自己下载
+
+`npm run test:ui`运行完成后，会在项目根路径下生成`test_logs`文件夹，存放测试报告。
 
 ### 其它说明
 - 有什么建议或问题随时和我交流

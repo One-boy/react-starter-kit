@@ -2,7 +2,7 @@
  * @Author: hy 
  * @Date: 2019-05-05 17:48:01 
  * @Last Modified by: huyu
- * @Last Modified time: 2019-06-02 15:26:59
+ * @Last Modified time: 2020-05-03 11:22:23
  */
 
 // 登录
@@ -56,7 +56,6 @@ class Login extends Component {
           console.log('返回错误', error)
           this.setState({ btnLoading: false })
         }
-
       }
 
     })
@@ -78,7 +77,6 @@ class Login extends Component {
         registerText: '登录'
       })
     }
-
   }
 
   render() {

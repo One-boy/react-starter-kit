@@ -1,4 +1,5 @@
-// jest相关配置
+// jest js测试相关配置
+
 module.exports = {
   // "setupTestFrameworkScriptFile": "jest-enzyme",
   testRegex: "/*(\\.)test\\.js$",

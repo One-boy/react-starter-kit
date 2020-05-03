@@ -2,7 +2,7 @@
  * @Author: hy 
  * @Date: 2019-05-05 17:48:17 
  * @Last Modified by: huyu
- * @Last Modified time: 2019-06-02 22:18:57
+ * @Last Modified time: 2020-05-03 11:23:21
  */
 
 // 测试页
@@ -32,7 +32,7 @@ class test1 extends Component {
     this.style = {
       height: '100%',
     }
-    //canceltoken
+    // canceltoken
     this.CANCEL_TOKEN = 'list/list2'
     // 请求字段
     this.requestBody = {
@@ -141,7 +141,6 @@ class test1 extends Component {
       },
     ]
   }
-
 
   render() {
     const { getFieldDecorator } = this.props.form
