@@ -14,7 +14,7 @@
 - 开发：npm start
 - 打包：npm run build
 - 测试：
-  - js:npm run test:js
+  - js：npm run test:js
   - ui：npm run test:ui
 
 ### 使用说明
@@ -70,6 +70,10 @@
 运行`npm run test:ui`前，需要确保`'./.local-chromium/win64-737027/chrome-win/chrome.exe'`有这个路径，没有的话，可以联系我或者自己下载
 
 `npm run test:ui`运行完成后，会在项目根路径下生成`test_logs`文件夹，存放测试报告。
+
+`jest`官方文档：[jest.io](https://jestjs.io/docs/en/cli)
+
+`puppeteer`官方文档：[puppeteer](https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions)
 
 ### 其它说明
 - 有什么建议或问题随时和我交流
