@@ -50,7 +50,7 @@ const webpackConfigProd = {
       verbose: false, //是否报告已删除的文件
     }),
     // 分析代码构成
-    new BundleAnalyzer({ analyzerPort: 3001 }),
+    // new BundleAnalyzer({ analyzerPort: 3001 }),
   ],
 }
 

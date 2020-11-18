@@ -169,6 +169,7 @@ const webpackConfigBase = {
   ],
   // 分离较大的包，单独成一个文件
   optimization: {
+    minimize:false,
     runtimeChunk: {
       name: "runtime"
     },
