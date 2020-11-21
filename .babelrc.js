@@ -36,7 +36,8 @@ const plugins = [
             "libraryName": "antd",
             "style": true
         }
-    ]
+    ],
+    ['react-hot-loader/babel']
 ]
 
 
