@@ -16,6 +16,11 @@ const PORT = 8888
 
 const webpackConfigDev = {
   mode: 'development',
+  resolve: {
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
+  },
   plugins: [
     // dll
     new webpack.DllReferencePlugin({
@@ -35,12 +40,14 @@ const webpackConfigDev = {
     new OpenBrowserPlugin({
       url: `http://localhost:${PORT}/#/login`
     }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   devtool: 'source-map',
   devServer: {
     contentBase: resolve('../app'),
     historyApiFallback: false,
-    hot: false,
+    hot: true,
     host: '0.0.0.0',
     port: PORT,
   },

@@ -1,4 +1,4 @@
-
+import {hot} from 'react-hot-loader/root'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ConfigProvider } from 'antd'
@@ -15,12 +15,15 @@ const store = {}
 if (!window.Blob) {
   window.Blob = {}
 }
+
+const Routes = hot(()=>(<Router>
+  <Index />
+</Router>))
+
 ReactDOM.render(
   <StoreProvider store={store}>
     <ConfigProvider locale={zh_CN}>
-      <Router>
-        <Index />
-      </Router>
+      <Routes/>
     </ConfigProvider >
   </StoreProvider>
   ,

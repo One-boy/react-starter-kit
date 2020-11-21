@@ -70,6 +70,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
+    "@hot-loader/react-dom": "^17.0.0",
     "antd": "^3.26.16",
     "axios": "^0.18.1",
     "blob-polyfill": "^2.0.20171115",
@@ -84,6 +85,7 @@
     "rc-tween-one": "^2.6.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hot-loader": "^4.13.0",
     "react-router-dom": "^5.1.2",
     "webpack-bundle-analyzer": "^3.7.0"
   },
