@@ -8,8 +8,4 @@ const TIMEOUT = global.__TIMEOUT__
 const LOG_DIR = global.__LOG_DIR__
 const URL_PREFIX = global.__URL_PREFIX__
 
-export {
-  TIMEOUT,
-  LOG_DIR,
-  URL_PREFIX,
-}
+export { TIMEOUT, LOG_DIR, URL_PREFIX }

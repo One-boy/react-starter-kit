@@ -1,21 +1,21 @@
 /*
- * @Author: hy 
- * @Date: 2019-05-05 17:48:17 
+ * @Author: hy
+ * @Date: 2019-05-05 17:48:17
  * @Last Modified by: huyu
- * @Last Modified time: 2020-05-03 11:23:21
+ * @Last Modified time: 2021-04-13 18:56:31
  */
 
 // 测试页
+// 类组件当中antd4.x form的用法
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Icon, Button, Card, Table, Pagination } from 'antd'
+import { Form, Input, Button, Card, Table, Pagination } from 'antd'
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import AJAXList from '@/api/List'
 import { cancelRequest } from '@/utils/ajaxCancel'
 
-@Form.create({})
 class test1 extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -40,15 +40,15 @@ class test1 extends Component {
       pageNo: 1,
       name: '',
       idCard: '',
-      AJAX_CANCEL_TOKEN: this.CANCEL_TOKEN
+      AJAX_CANCEL_TOKEN: this.CANCEL_TOKEN,
     }
+    this.formRef = React.createRef()
   }
 
   static propTypes = {
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
-    form: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
@@ -70,18 +70,33 @@ class test1 extends Component {
   // 点击查询
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.form.validateFields((err, values) => {
-      if (err) {
-        return
-      }
-      console.log('表单数据: ', values)
-      this.getList()
-    })
+    this.formRef.current
+      .validateFields()
+      .then((values) => {
+        console.log('表单数据: ', values)
+        this.getList()
+      })
+      .catch((errorInfo) => {
+        /*
+      errorInfo:
+        {
+          values: {
+            username: 'username',
+            password: 'password',
+          },
+          errorFields: [
+            { name: ['password'], errors: ['Please input your Password!'] },
+          ],
+          outOfDate: false,
+        }
+      */
+        console.log(errorInfo)
+      })
   }
 
   // 点击重置
   onClickReset = () => {
-    this.props.form.resetFields()
+    this.formRef.current.resetFields()
   }
 
   // 查看详情
@@ -113,7 +128,7 @@ class test1 extends Component {
         title: '序号',
         width: '10%',
         key: 'index',
-        render: (record, text, index) => (<span key={index}>{index + 1}</span>),
+        render: (record, text, index) => <span key={index}>{index + 1}</span>,
       },
       {
         title: '姓名',
@@ -137,70 +152,67 @@ class test1 extends Component {
         title: '操作',
         width: '10%',
         key: 'handler',
-        render: (record) => (<p><a onClick={() => this.onClickDetail(record)}>详情</a></p>),
+        render: (record) => (
+          <p>
+            <a onClick={() => this.onClickDetail(record)}>详情</a>
+          </p>
+        ),
       },
     ]
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form
     const { tableData, tableLoading } = this.state
     return (
       <div style={this.style} className="transform-show">
         <Card bordered={false}>
-          <Form layout="inline" onSubmit={this.handleSubmit}>
-            <Form.Item >
-              {getFieldDecorator('name', {
-                rules: [{ required: true, message: '请输入用户名' }],
-              })(
-                <Input
-                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="用户名"
-                />,
-              )}
+          <Form layout="inline" ref={this.formRef}>
+            <Form.Item
+              name="name"
+              rules={[{ required: true, message: '请输入用户名' }]}
+            >
+              <Input
+                prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="用户名"
+              />
             </Form.Item>
-            <Form.Item >
-              {getFieldDecorator('idCard', {
-                rules: [{ required: true, message: '请输入身份证号' }],
-              })(
-                <Input
-                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="身份证号"
-                />,
-              )}
+            <Form.Item
+              name="idCard"
+              rules={[{ required: true, message: '请输入身份证号' }]}
+            >
+              <Input
+                prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="身份证号"
+              />
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit" >
+              <Button type="primary" onClick={this.handleSubmit}>
                 查询
               </Button>
             </Form.Item>
             <Form.Item>
-              <Button onClick={this.onClickReset} >
-                重置
-              </Button>
+              <Button onClick={this.onClickReset}>重置</Button>
             </Form.Item>
             <Form.Item>
-              <Button onClick={this.onClickCancel} >
-                取消请求
-              </Button>
+              <Button onClick={this.onClickCancel}>取消请求</Button>
             </Form.Item>
           </Form>
 
           <div style={{ marginTop: 12 }}>
             <Table
               bordered
+              rowKey={(r) => r.id}
               pagination={false}
               loading={{ tip: '正在加载数据', spinning: tableLoading }}
               columns={this.getColums()}
               dataSource={tableData.list}
-
             />
             <Pagination
               showSizeChanger
               pageSize={tableData.pageSize}
               style={{ marginTop: 12, textAlign: 'right' }}
               total={tableData.total}
-              showTotal={total => `共 ${total} 条`}
+              showTotal={(total) => `共 ${total} 条`}
               current={tableData.pageNo}
               onShowSizeChange={this.onShowSizeChange}
               onChange={this.onChangePageNo}

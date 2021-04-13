@@ -1,8 +1,8 @@
 /*
- * @Author: hy 
- * @Date: 2019-05-05 17:48:17 
+ * @Author: hy
+ * @Date: 2019-05-05 17:48:17
  * @Last Modified by: huyu
- * @Last Modified time: 2020-05-03 11:21:58
+ * @Last Modified time: 2021-04-13 16:03:39
  */
 
 // web workers示例
@@ -12,7 +12,6 @@ import MainWorker from './main.worker'
 import { Row, Col, Button, Input } from 'antd'
 
 export default class Worker extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -57,8 +56,16 @@ export default class Worker extends Component {
       <div style={this.style}>
         <h3>Web Workers 示例：</h3>
         <Row gutter={16}>
-          <Col span={8}><Input placeholder="请输入消息" value={value} onChange={this.onChange} /></Col>
-          <Col span={8}><Button onClick={this.onClickSend}>发送消息</Button></Col>
+          <Col span={8}>
+            <Input
+              placeholder="请输入消息"
+              value={value}
+              onChange={this.onChange}
+            />
+          </Col>
+          <Col span={8}>
+            <Button onClick={this.onClickSend}>发送消息</Button>
+          </Col>
         </Row>
         <h5>收到来自Worker的消息：</h5>
         <p>{text}</p>

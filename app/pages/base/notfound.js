@@ -1,22 +1,18 @@
 /*
- * @Author: hy 
- * @Date: 2019-05-05 17:47:40 
- * @Last Modified by:   hy 
- * @Last Modified time: 2019-05-05 17:47:40 
+ * @Author: hy
+ * @Date: 2019-05-05 17:47:40
+ * @Last Modified by: huyu
+ * @Last Modified time: 2021-04-13 16:03:25
  */
-
 
 //未找到路由页
 
 import React, { Component } from 'react'
 
-
 export default class home extends Component {
-
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
   }
 
   render() {

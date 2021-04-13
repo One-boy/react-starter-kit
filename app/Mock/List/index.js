@@ -1,8 +1,8 @@
 /*
- * @Author: hy 
- * @Date: 2019-05-06 18:28:24 
- * @Last Modified by: hy
- * @Last Modified time: 2019-05-07 15:48:52
+ * @Author: hy
+ * @Date: 2019-05-06 18:28:24
+ * @Last Modified by: huyu
+ * @Last Modified time: 2021-04-13 19:02:43
  */
 
 // mock数据
@@ -10,12 +10,9 @@ import mock from '@/Mock/base'
 import checkEnable from '@/Mock/checkEnable'
 
 class List {
-
   @checkEnable
   static list2(target, name, descriptor) {
-
     descriptor.value = async (reqData) => {
-
       const data = {
         status: 1,
         msg: '登录成功',
@@ -36,7 +33,6 @@ class List {
 
     return descriptor
   }
-
 }
 
 export default List

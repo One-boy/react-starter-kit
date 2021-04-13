@@ -1,8 +1,8 @@
 /*
- * @Author: hy 
- * @Date: 2019-05-06 18:28:24 
- * @Last Modified by: hy
- * @Last Modified time: 2019-05-07 15:48:52
+ * @Author: hy
+ * @Date: 2019-05-06 18:28:24
+ * @Last Modified by: huyu
+ * @Last Modified time: 2021-04-13 19:02:46
  */
 
 // mock数据
@@ -10,12 +10,9 @@ import mock from '@/Mock/base'
 import checkEnable from '@/Mock/checkEnable'
 
 class User {
-
   @checkEnable
   static login(target, name, descriptor) {
-
     descriptor.value = async (reqData) => {
-
       const data = {
         status: 1,
         msg: '登录成功',
@@ -30,9 +27,7 @@ class User {
 
   @checkEnable
   static logout(target, name, descriptor) {
-
     descriptor.value = async (reqData) => {
-
       const data = {
         status: 1,
         msg: '登出成功',
@@ -47,9 +42,7 @@ class User {
 
   @checkEnable
   static register(target, name, descriptor) {
-
     descriptor.value = async (reqData) => {
-
       const data = {
         status: 1,
         msg: '注册成功',

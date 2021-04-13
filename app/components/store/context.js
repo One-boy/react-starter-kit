@@ -1,4 +1,3 @@
-
 /**
  * craete context
  */
@@ -6,7 +5,7 @@ import React from 'react'
 
 const StoreContext = React.createContext({
   store: {},
-  setStore: () => { },
+  setStore: () => {},
 })
 
 export default StoreContext

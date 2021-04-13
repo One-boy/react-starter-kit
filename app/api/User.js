@@ -1,9 +1,7 @@
-
 import Mock from '@/Mock'
 import Base from './base'
 
 class User extends Base {
-
   // 登录
   @Mock.User.login
   static async login(reqData) {
@@ -21,7 +19,6 @@ class User extends Base {
   static async logout(reqData) {
     return await this.ajaxPost('/usercenter/logout', reqData)
   }
-
 }
 
 export default User

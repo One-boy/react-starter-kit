@@ -1,28 +1,24 @@
 /*
- * @Author: hy 
- * @Date: 2019-05-05 17:47:14 
- * @Last Modified by: hy
- * @Last Modified time: 2019-05-07 14:00:27
+ * @Author: hy
+ * @Date: 2019-05-05 17:47:14
+ * @Last Modified by: huyu
+ * @Last Modified time: 2021-04-13 18:12:57
  */
 
 // 公共头部
 
 import React, { Component } from 'react'
-import {
-  Link, withRouter,
-} from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Modal, message } from 'antd'
 import { title } from '@/config/base'
 import AJAXUser from '@/api/User'
-import styles from '@/style/header/index.less'
+import styles from './header.module.less'
 
 @withRouter
 class Header extends Component {
-
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
   }
 
   /**
@@ -40,12 +36,12 @@ class Header extends Component {
         let data = await AJAXUser.logout(reqData)
         message.success(data.msg || '退出成功')
         _self.props.history.push('/login')
-      }
+      },
     })
   }
   render() {
     const userInfo = {
-      name: 'admin'
+      name: 'admin',
     }
     return (
       <header className={styles.header}>
@@ -54,8 +50,14 @@ class Header extends Component {
           <span className={styles.text}>{title}</span>
         </Link>
         <div className={styles.user}>
-          <span >{userInfo.name}</span>
-          <a onClick={this.onLogout} title="退出系统" className={styles.userLogout}>退出</a>
+          <span>{userInfo.name}</span>
+          <a
+            onClick={this.onLogout}
+            title="退出系统"
+            className={styles.userLogout}
+          >
+            退出
+          </a>
         </div>
       </header>
     )

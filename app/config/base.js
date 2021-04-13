@@ -3,7 +3,6 @@
  */
 /* eslint  no-undef:0 */
 
-
 // 本地开发打开的路径以及端口
 let httpUrl = 'http://127.0.0.1:8080/data'
 
@@ -24,7 +23,6 @@ const prefix = httpUrl
 const suffix = '.json'
 // 超时时间
 const timeout = 100000
-
 
 // 左侧导航配置
 const menusData = [
@@ -57,11 +55,4 @@ const menusData = [
   },
 ]
 
-export {
-  prefix,
-  suffix,
-  timeout,
-  title,
-  menusData,
-  EnableMock,
-}
+export { prefix, suffix, timeout, title, menusData, EnableMock }

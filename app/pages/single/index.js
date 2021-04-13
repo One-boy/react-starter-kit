@@ -1,8 +1,8 @@
 /*
- * @Author: hy 
- * @Date: 2019-05-05 17:48:17 
+ * @Author: hy
+ * @Date: 2019-05-05 17:48:17
  * @Last Modified by: huyu
- * @Last Modified time: 2020-05-03 11:22:08
+ * @Last Modified time: 2021-04-13 16:03:33
  */
 
 // 独立页
@@ -11,7 +11,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 export default class Single1 extends Component {
-
   constructor(props) {
     super(props)
     this.state = {}
@@ -27,10 +26,6 @@ export default class Single1 extends Component {
   }
 
   render() {
-    return (
-      <div style={this.style}>
-        独立页
-      </div>
-    )
+    return <div style={this.style}>独立页</div>
   }
 }

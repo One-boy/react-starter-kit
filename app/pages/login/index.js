@@ -1,136 +1,90 @@
 /*
- * @Author: hy 
- * @Date: 2019-05-05 17:48:01 
+ * @Author: hy
+ * @Date: 2019-05-05 17:48:01
  * @Last Modified by: huyu
- * @Last Modified time: 2020-05-03 11:22:23
+ * @Last Modified time: 2021-04-13 18:48:46
  */
 
 // 登录
 
-/* eslint  react/prop-types:0 */
-import React, { Component } from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd'
+import React, { useState } from 'react'
+import { Form, Input, Button, Checkbox } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import AJAXUser from '@/api/User'
-import styles from '@/style/login/index.less'
+import styles from './index.module.less'
 import classNames from 'classnames'
+import Proptypes from 'prop-types'
 
 const FormItem = Form.Item
 
-@Form.create()
-class Login extends Component {
+function Login(props) {
+  const [btnLoading, setBtnLoading] = useState(false)
+  const [form] = Form.useForm()
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      // 是否注册 
-      isRegister: false,
-      // 按钮加载
-      btnLoading: false,
-      // 切换按钮文字
-      registerText: '注册'
+  const onFinish = async (values) => {
+    console.log('Success:', values)
+    const reqData = values
+    setBtnLoading(true)
+
+    try {
+      let data = await AJAXUser.login(reqData)
+      console.log('返回登录数据', data)
+      props.history && props.history.push('/')
+    } catch (error) {
+      console.log('返回错误', error)
     }
+    setBtnLoading(false)
   }
 
-  /**
-   * 表单登录
-   */
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.props.form.validateFields(async (err, values) => {
-      if (err) {
-        return
-      }
-      const reqData = values
-      this.setState({ btnLoading: true })
-
-      if (this.state.isRegister) {
-        let data = await AJAXUser.register(reqData)
-        console.log('返回注册数据', data)
-        this.props.history && this.props.history.push('/')
-      } else {
-        try {
-          let data = await AJAXUser.login(reqData)
-          console.log('返回登录数据', data)
-          this.props.history && this.props.history.push('/')
-        } catch (error) {
-          console.log('返回错误', error)
-          this.setState({ btnLoading: false })
-        }
-      }
-
-    })
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo)
   }
 
-  /**
-   * 去注册
-   */
-  chanageRegister = () => {
-    let { isRegister } = this.state
-    if (isRegister) {
-      this.setState({
-        isRegister: false,
-        registerText: '注册'
-      })
-    } else {
-      this.setState({
-        isRegister: true,
-        registerText: '登录'
-      })
-    }
-  }
-
-  render() {
-    const { getFieldDecorator } = this.props.form
-    const { isRegister, btnLoading, registerText } = this.state
-    return (
-      <div className={classNames(styles.wrap, styles.wrap2, 'wrap3')}>
-        <div className={styles.content}>
-          <h2>登录</h2>
-          <Form onSubmit={this.handleSubmit} className={styles['login-form']}>
-            {
-              isRegister ?
-                <FormItem>
-                  {getFieldDecorator('nickName', {
-                    rules: [{ required: true, message: '请输入昵称' }],
-                  })(
-                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="nickName" placeholder="昵称" />
-                  )}
-                </FormItem>
-                : null
-            }
-            <FormItem>
-              {getFieldDecorator('username', {
-                rules: [{ required: true, message: '请输入用户名' }],
-              })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
-              )}
-            </FormItem>
-            <FormItem>
-              {getFieldDecorator('password', {
-                rules: [{ required: true, message: '请输入密码' }],
-              })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
-              )}
-            </FormItem>
-
-            <FormItem>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true,
-              })(
-                <Checkbox>记住我</Checkbox>
-              )}
-              {/* <a className="login-form-forgot" href="">忘记密码</a> */}
-              <Button type="primary" htmlType="submit" className={styles['login-form-button']} loading={btnLoading}>
-                {registerText === '登录' ? '注册' : '登录'}
-              </Button>
-              <a onClick={this.chanageRegister}>{registerText}</a>
-            </FormItem>
-          </Form>
-        </div>
+  return (
+    <div className={classNames(styles.wrap, styles.wrap2, 'wrap3')}>
+      <div className={styles.content}>
+        <h2>登录</h2>
+        <Form
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          className={styles['login-form']}
+        >
+          <FormItem
+            name="username"
+            rules={[{ required: true, message: '请输入用户名' }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="用户名" />
+          </FormItem>
+          <FormItem
+            name="password"
+            rules={[{ required: true, message: '请输入密码' }]}
+          >
+            <Input
+              prefix={<LockOutlined />}
+              type="password"
+              placeholder="密码"
+            />
+          </FormItem>
+          <FormItem name="remember" initialValue valuePropName="checked">
+            <Checkbox>记住我</Checkbox>
+          </FormItem>
+          <FormItem>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className={styles['login-form-button']}
+              loading={btnLoading}
+            >
+              登录
+            </Button>
+          </FormItem>
+        </Form>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
+Login.propTypes = {
+  history: Proptypes.object.isRequired,
+}
 export default Login

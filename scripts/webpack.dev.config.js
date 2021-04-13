@@ -1,13 +1,11 @@
 /**
  * 开发环境配置
  */
-/* eslint no-undef:0 */
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpackConfigBase = require('./webpack.base.config')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 const path = require('path')
-const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 
 function resolve(p) {
   return path.join(__dirname, p)
@@ -35,14 +33,16 @@ const webpackConfigDev = {
     new HtmlWebpackPlugin({
       template: resolve('../app/index.html'),
       // 这里列出要加入html中的js文件
-      dlls: ['./dll/dll.react.development.js', './dll/dll.other.development.js'],
+      dlls: [
+        './dll/dll.react.development.js',
+        './dll/dll.other.development.js',
+      ],
     }),
-    new OpenBrowserPlugin({
-      url: `http://localhost:${PORT}/#/login`
-    }),
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
+  optimization: {
+    moduleIds: 'named',
+  },
   devtool: 'source-map',
   devServer: {
     contentBase: resolve('../app'),
@@ -50,6 +50,7 @@ const webpackConfigDev = {
     hot: true,
     host: '0.0.0.0',
     port: PORT,
+    open: `http://localhost:${PORT}/#/login`,
   },
 }
 

@@ -5,7 +5,7 @@ function getOpenKeys(props, menuData) {
   const { pathname } = props.location
   let urlList = getMenuKeys(menuData)
 
-  urlList = urlList.filter(d => {
+  urlList = urlList.filter((d) => {
     if (d && pathname.indexOf(d) === 0) {
       return true
     }
@@ -17,7 +17,7 @@ function getOpenKeys(props, menuData) {
 // 菜单生成数组
 function getMenuKeys(menuData) {
   let keys = []
-  menuData.forEach(d => {
+  menuData.forEach((d) => {
     if (d.navKey) {
       keys.push(d.navKey)
       if (d.children) {
@@ -33,7 +33,7 @@ function getSelectKeys(props, menuData) {
   const { pathname } = props.location
   let urlList = getMenuKeys(menuData)
 
-  urlList = urlList.filter(d => {
+  urlList = urlList.filter((d) => {
     if (d && pathname.indexOf(d) === 0) {
       return true
     }
@@ -42,7 +42,4 @@ function getSelectKeys(props, menuData) {
   return [urlList[urlList.length - 1]]
 }
 
-export {
-  getOpenKeys,
-  getSelectKeys,
-}
+export { getOpenKeys, getSelectKeys }

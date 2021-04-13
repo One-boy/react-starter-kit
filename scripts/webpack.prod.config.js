@@ -7,10 +7,10 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpackConfigBase = require('./webpack.base.config')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 const path = require('path')
 const Copy = require('copy-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 function resolve(p) {
@@ -35,22 +35,27 @@ const webpackConfigProd = {
       // 这里列出要加入html中的js文件
       dlls: ['./dll/dll.react.production.js', './dll/dll.other.production.js'],
     }),
-    new Copy([
-      { from: './app/resource', to: './resource' },
-      {
-        from: './app/dll/*.production.js', to: './dll/', transformPath: (targetPath, absolutePath) => {
-          targetPath = targetPath.replace(/(\/|\\)app(\/|\\)dll/, '')
-          return targetPath
-        }
-      },
-    ]),
+    new Copy({
+      patterns: [
+        { from: './app/resource', to: './resource' },
+        {
+          from: './app/dll/*.production.js',
+          to: './dll',
+
+          // transformPath: (targetPath, absolutePath) => {
+          //   targetPath = targetPath.replace(/(\/|\\)app(\/|\\)dll/, '')
+          //   return targetPath
+          // },
+        },
+      ],
+    }),
     new CleanWebpackPlugin({
       //打包前删除文件夹
       cleanOnceBeforeBuildPatterns: [path.join(__dirname, '../dist')],
       verbose: false, //是否报告已删除的文件
     }),
     // 分析代码构成
-    new BundleAnalyzer({ analyzerPort: 3001 }),
+    // new BundleAnalyzer({ analyzerPort: 3001 }),
   ],
 }
 

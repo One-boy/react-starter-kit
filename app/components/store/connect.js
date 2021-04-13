@@ -1,6 +1,5 @@
-
 /**
- * 
+ *
  * store 连接装饰器
  * 使用react context的Consumer
  * 功能：
@@ -10,18 +9,17 @@ import React from 'react'
 import StoreContext from './context'
 
 const connect = (mapStoreToProps) => (TargetClass) => {
-  return props => (
+  return (props) => (
     <StoreContext.Consumer>
-      {value =>
+      {(value) => (
         <TargetClass
           {...props}
           storeHandle={{ setStore: value.setStore }}
           {...mapStoreToProps(value.store)}
         />
-      }
+      )}
     </StoreContext.Consumer>
   )
 }
-
 
 export default connect

@@ -1,4 +1,3 @@
-
 /**
  * webpack基础配置
  */
@@ -10,14 +9,13 @@ const HappyPack = require('happypack')
 const os = require('os')
 const threadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
-
 function resolve(p) {
   return path.join(__dirname, p)
 }
 
 const webpackConfigBase = {
   entry: {
-    app: ['@babel/polyfill', resolve('../app/client.js')]
+    app: [resolve('../app/client.js')],
   },
   output: {
     path: resolve('../dist'),
@@ -25,18 +23,23 @@ const webpackConfigBase = {
     chunkFilename: 'chunks/[name].[hash:4].js',
   },
   resolve: {
-    extensions: ['.js', '.json'],
+    extensions: ['.js'],
     // 文件引用路径替换，加@区别于node_modules库
     alias: {
       '@': resolve('../app'),
-      '@ant-design/icons/lib/dist$': resolve('../app/icons.js'), // 解决ant把icon全部打入的问题，需要的icon在icons.js中加入
     },
   },
   module: {
     rules: [
       {
         test: /\.worker\.js$/,
-        use: { loader: 'worker-loader', options: { name: 'workers/[name].[hash:4].js' } }
+        use: {
+          loader: 'worker-loader',
+          options: {
+            filename: 'workers/file.[name].[hash:4].js',
+            chunkFilename: 'workers/chunk.[name].[hash:4].js',
+          },
+        },
       },
       {
         exclude: /node_modules/,
@@ -48,7 +51,39 @@ const webpackConfigBase = {
         exclude: resolve('../node_modules'),
         use: [
           MiniCssExtractPlugin.loader,
-          'happypack/loader?id=happyStyle',
+          //  'happypack/loader?id=happyStyle'
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2, // 之前有2个loaders
+              sourceMap: true,
+              // 启用cssModules
+              modules: {
+                compileType: 'module',
+                auto: true,
+                localIdentName: '[path][name]__[local]--[hash:base64:5]', // 名字生成规则
+              },
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              postcssOptions: {
+                plugins: [['autoprefixer', {}]],
+              },
+            },
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              sourceMap: true,
+              lessOptions: {
+                javascriptEnabled: true,
+                paths: [resolve('../app')],
+              },
+            },
+          },
         ],
       },
       {
@@ -56,18 +91,39 @@ const webpackConfigBase = {
         include: resolve('../node_modules'),
         use: [
           MiniCssExtractPlugin.loader,
-          'happypack/loader?id=happyStyleNoModules',
+          // 'happypack/loader?id=happyStyleNoModules',
+          {
+            loader: 'css-loader',
+            options: {},
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {},
+            },
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+                paths: [resolve('../node_modules')],
+              },
+            },
+          },
         ],
       },
       {
         test: /\.(woff|eot|ttf|svg)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            name: 'resource/iconfont/[hash:4].[ext]',
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'resource/iconfont/[hash:4].[ext]',
+            },
           },
-        }],
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -76,9 +132,9 @@ const webpackConfigBase = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'resource/image/[name].[hash:4].[ext]'
-            }
-          }
+              name: 'resource/image/[name].[hash:4].[ext]',
+            },
+          },
         ],
       },
     ],
@@ -87,9 +143,7 @@ const webpackConfigBase = {
     // happypack处理js
     new HappyPack({
       id: 'happyBabel',
-      loaders: [
-        { loader: 'babel-loader' },
-      ],
+      loaders: [{ loader: 'babel-loader', options: { cacheDirectory: true } }],
       threadPool,
       verbose: true,
     }),
@@ -98,31 +152,33 @@ const webpackConfigBase = {
       id: 'happyStyle',
       loaders: [
         {
-          loader: 'css-loader', options: {
+          loader: 'css-loader',
+          options: {
             importLoaders: 2, // 之前有2个loaders
             modules: true, // 启用cssModules
             sourceMap: true,
-            minimize: true, //这个需要注释，如果开启，则开发时样式sourcemap始终是最后一行。
             localIdentName: '[path][name]__[local]--[hash:base64:5]', // 名字生成规则
-          }
+          },
         },
         {
           loader: 'postcss-loader',
           options: {
-            ident: 'postcss',
-            sourceMap: true,//为true,在样式追溯时，显示的是编写时的样式，为false，则为编译后的样式
-          }
+            sourceMap: true,
+            postcssOptions: {
+              plugins: [['autoprefixer', {}]],
+            },
+          },
         },
         {
           loader: 'less-loader',
           options: {
             sourceMap: true,
             javascriptEnabled: true,
-            paths: [
-              resolve('../app/style'),
-            ]
-          }
-        }
+            lessOptions: {
+              paths: [resolve('../app')],
+            },
+          },
+        },
       ],
       threadPool,
       verbose: true,
@@ -132,24 +188,26 @@ const webpackConfigBase = {
       id: 'happyStyleNoModules',
       loaders: [
         {
-          loader: 'css-loader', options: {
-            // sourceMap: true,
-            minimize: true,
-          }
+          loader: 'css-loader',
+          options: {},
         },
         {
           loader: 'postcss-loader',
+          options: {
+            postcssOptions: {
+              plugins: [['autoprefixer', {}]],
+            },
+          },
         },
         {
           loader: 'less-loader',
           options: {
-            sourceMap: true,
             javascriptEnabled: true,
-            paths: [
-              resolve('../node_modules'),
-            ]
-          }
-        }
+            lessOptions: {
+              paths: [resolve('../node_modules')],
+            },
+          },
+        },
       ],
       threadPool,
       verbose: true,
@@ -158,19 +216,22 @@ const webpackConfigBase = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: 'styles/style.[hash:4].css',
-      chunkFilename: 'styles/[name]-[hash:4].css'
+      filename: 'styles/file.[name]-[hash:4].css',
+      chunkFilename: 'styles/chunk.[name]-[hash:4].css',
     }),
     // 去掉moment语言包
     // 使用的时候，则需要引入中文包，
     // import 'moment/locale/zh-cn'
     // moment.locale('zh-cn') // 设置为中文
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^\.\/locale$/,
+      contextRegExp: /moment$/,
+    }),
   ],
   // 分离较大的包，单独成一个文件
   optimization: {
     runtimeChunk: {
-      name: "runtime"
+      name: 'runtime',
     },
     splitChunks: {
       chunks: 'all',
@@ -200,11 +261,13 @@ const webpackConfigBase = {
           priority: 12,
           test(mod) {
             if (mod.resource) {
-              const include = [/[\\/]node_modules[\\/]/].every(reg => {
-                return reg.test(mod.resource);
+              const include = [/[\\/]node_modules[\\/]/].every((reg) => {
+                return reg.test(mod.resource)
               })
-              const exclude = [/[\\/]node_modules[\\/](antd|core-js|rc-.*)[\\/]/].some(reg => {
-                return reg.test(mod.resource);
+              const exclude = [
+                /[\\/]node_modules[\\/](antd|core-js|rc-.*)[\\/]/,
+              ].some((reg) => {
+                return reg.test(mod.resource)
               })
               return include && !exclude
             }
@@ -212,10 +275,9 @@ const webpackConfigBase = {
           },
           name: 'others',
         },
-      }
-    }
-  }
+      },
+    },
+  },
 }
 
 module.exports = webpackConfigBase
-

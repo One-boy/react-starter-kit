@@ -1,5 +1,5 @@
 /**
- * code定义 
+ * code定义
  */
 
 // 服务端返回status定义
@@ -10,6 +10,4 @@ const returnStatus = {
   NOT_LOGIN: -1,
 }
 
-export {
-  returnStatus,
-}
+export { returnStatus }

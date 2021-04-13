@@ -1,8 +1,8 @@
 /*
- * @Author: hy 
- * @Date: 2019-05-05 17:47:31 
+ * @Author: hy
+ * @Date: 2019-05-05 17:47:31
  * @Last Modified by: huyu
- * @Last Modified time: 2019-05-29 16:27:01
+ * @Last Modified time: 2021-04-13 18:14:02
  */
 
 // 左侧导航
@@ -11,18 +11,14 @@ import React, { Component } from 'react'
 import { Menu } from 'antd'
 import { menusData } from '@/config/base'
 import PropTypes from 'prop-types'
-import {
-  withRouter,
-} from 'react-router-dom'
-import '@/style/menu/index.less'
+import { withRouter } from 'react-router-dom'
 import { getOpenKeys, getSelectKeys } from './navUtils'
+import './nav.module.less'
 
 const SubMenu = Menu.SubMenu
 
 @withRouter
-
 class Nav extends Component {
-
   constructor(props) {
     super(props)
     console.log(menusData)
@@ -39,10 +35,7 @@ class Nav extends Component {
     history: PropTypes.object,
   }
 
-  componentDidMount() {
-
-  }
-
+  componentDidMount() {}
 
   static getDerivedStateFromProps(props, state) {
     const { pathname } = state
@@ -60,11 +53,10 @@ class Nav extends Component {
    * @memberof Nav
    */
   navMini = () => {
-    this.setState(state => ({
+    this.setState((state) => ({
       isMini: !state.isMini,
     }))
   }
-
 
   /**
    * @description 生成导航菜单
@@ -76,35 +68,49 @@ class Nav extends Component {
     return children.map((item) => {
       if (!item.children || item.children.length === 0) {
         return (
-          <Menu.Item key={item.navKey ? item.navKey : item.id} name={item.navName} style={{ paddingLeft: 0 }}>
-            <i className={`anticon qqbicon qqbicon-${item.navIcon}`} title={item.navName} />
+          <Menu.Item
+            key={item.navKey ? item.navKey : item.id}
+            name={item.navName}
+            style={{ paddingLeft: 0 }}
+          >
+            <i
+              className={`anticon qqbicon qqbicon-${item.navIcon}`}
+              title={item.navName}
+            />
             <span className="menu-name">{item.navName}</span>
           </Menu.Item>
         )
       }
       return (
-        <SubMenu key={item.navKey}
+        <SubMenu
+          key={item.navKey}
           title={
             <span>
-              <i className={`anticon qqbicon qqbicon-${item.navIcon}`} title={item.navName} />
+              <i
+                className={`anticon qqbicon qqbicon-${item.navIcon}`}
+                title={item.navName}
+              />
               <span className="menu-name">{item.navName}</span>
             </span>
           }
         >
-          {
-            item.children.map((child) =>
-              (
-                <Menu.Item key={child.navKey ? child.navKey : child.id} name={child.navName} title={child.navName}>
-                  <i className={`anticon qqbicon qqbicon-${child.navIcon}`} title={child.navName} />
-                  <span className="menu-name">{child.navName}</span>
-                </Menu.Item>
-              ))
-          }
+          {item.children.map((child) => (
+            <Menu.Item
+              key={child.navKey ? child.navKey : child.id}
+              name={child.navName}
+              title={child.navName}
+            >
+              <i
+                className={`anticon qqbicon qqbicon-${child.navIcon}`}
+                title={child.navName}
+              />
+              <span className="menu-name">{child.navName}</span>
+            </Menu.Item>
+          ))}
         </SubMenu>
       )
     })
   }
-
 
   /**
    * @description 打开关闭折叠菜单
@@ -121,7 +127,6 @@ class Nav extends Component {
     })
   }
 
-
   /**
    * @description 点击菜单
    * @memberof Nav
@@ -129,7 +134,6 @@ class Nav extends Component {
   _handleClick = (e) => {
     this.props.history.push(e.key)
   }
-
 
   render() {
     const { isMini, openKeys } = this.state

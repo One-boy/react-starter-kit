@@ -3,11 +3,7 @@
  */
 /* eslint  react/prop-types:0 */
 import React, { Component, Suspense } from 'react'
-import {
-  Route,
-  Switch,
-  Redirect,
-} from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import Header from './header'
 import Nav from './nav'
@@ -21,11 +17,9 @@ import worker from '@/pages/worker'
 const example1 = React.lazy(() => import('@/pages/list/example1'))
 
 export default class home extends Component {
-
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
   }
 
   render() {
@@ -36,8 +30,8 @@ export default class home extends Component {
           <Nav />
           <div className="main-body-content">
             <ErrorBoundary>
-              <Suspense fallback={<div>Loading....</div>} >
-                <Switch >
+              <Suspense fallback={<div>Loading....</div>}>
+                <Switch>
                   <Route path="/list/example1" component={example1} />
                   <Route path="/list/example2" component={example2} />
                   <Route path="/single" component={single} />

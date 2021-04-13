@@ -1,8 +1,8 @@
 /*
- * @Author: huyu 
- * @Date: 2019-06-07 17:26:38 
+ * @Author: huyu
+ * @Date: 2019-06-07 17:26:38
  * @Last Modified by: huyu
- * @Last Modified time: 2020-05-03 11:22:28
+ * @Last Modified time: 2021-04-13 15:31:15
  */
 
 // 登录页测试
@@ -12,7 +12,7 @@ import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { shallow, mount, render } from 'enzyme'
 // 引入polyfill，不然async await无法用，不知道为啥，babel-jest插件没起作用？
-import '@babel/polyfill'
+// import '@babel/polyfill'
 import Login from './index'
 
 Enzyme.configure({ adapter: new Adapter() })

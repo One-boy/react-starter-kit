@@ -1,8 +1,8 @@
 /*
- * @Author: hy 
- * @Date: 2019-05-05 17:48:17 
- * @Last Modified by: hy
- * @Last Modified time: 2019-05-06 10:46:53
+ * @Author: hy
+ * @Date: 2019-05-05 17:48:17
+ * @Last Modified by: huyu
+ * @Last Modified time: 2021-04-13 16:04:04
  */
 
 // 测试页
@@ -18,7 +18,6 @@ import tab3 from './child/tab3'
 const TabPane = Tabs.TabPane
 
 export default class test1 extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -26,7 +25,6 @@ export default class test1 extends Component {
     }
     this.style = {
       height: '100%',
-
     }
   }
 

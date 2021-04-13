@@ -1,8 +1,8 @@
 /*
- * @Author: hy 
- * @Date: 2019-05-05 17:23:01 
+ * @Author: hy
+ * @Date: 2019-05-05 17:23:01
  * @Last Modified by: huyu
- * @Last Modified time: 2020-05-03 11:22:44
+ * @Last Modified time: 2021-04-13 16:04:12
  */
 
 // tab1
@@ -20,8 +20,8 @@ export default class Tab1 extends Component {
   }
 
   /**
-  * 文件变化
-  */
+   * 文件变化
+   */
   onFileChange = async (e) => {
     const files = e.target.files
     if (files.length) {
@@ -43,7 +43,7 @@ export default class Tab1 extends Component {
     return (
       <div style={this.style}>
         <h3>tab1</h3>
-        <input type='file' onChange={this.onFileChange} />
+        <input type="file" onChange={this.onFileChange} />
         <div style={{ width: 500 }}>
           <img src={imgUrl} style={{ maxWidth: '100%' }} />
         </div>
