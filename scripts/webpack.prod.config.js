@@ -40,12 +40,9 @@ const webpackConfigProd = {
         { from: './app/resource', to: './resource' },
         {
           from: './app/dll/*.production.js',
-          to: './dll',
-
-          // transformPath: (targetPath, absolutePath) => {
-          //   targetPath = targetPath.replace(/(\/|\\)app(\/|\\)dll/, '')
-          //   return targetPath
-          // },
+          to: ({ context, absoluteFilename }) => {
+            return 'dll/[name][ext]'
+          },
         },
       ],
     }),
