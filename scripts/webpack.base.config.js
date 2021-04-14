@@ -70,7 +70,7 @@ const webpackConfigBase = {
             options: {
               sourceMap: true,
               postcssOptions: {
-                plugins: [['autoprefixer', {}]],
+                plugins: [['autoprefixer']],
               },
             },
           },
@@ -99,7 +99,7 @@ const webpackConfigBase = {
           {
             loader: 'postcss-loader',
             options: {
-              postcssOptions: {},
+              postcssOptions: { plugins: [['autoprefixer']] },
             },
           },
           {
@@ -147,71 +147,6 @@ const webpackConfigBase = {
       threadPool,
       verbose: true,
     }),
-    // happypack处理样式
-    new HappyPack({
-      id: 'happyStyle',
-      loaders: [
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 2, // 之前有2个loaders
-            modules: true, // 启用cssModules
-            sourceMap: true,
-            localIdentName: '[path][name]__[local]--[hash:base64:5]', // 名字生成规则
-          },
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: true,
-            postcssOptions: {
-              plugins: [['autoprefixer', {}]],
-            },
-          },
-        },
-        {
-          loader: 'less-loader',
-          options: {
-            sourceMap: true,
-            javascriptEnabled: true,
-            lessOptions: {
-              paths: [resolve('../app')],
-            },
-          },
-        },
-      ],
-      threadPool,
-      verbose: true,
-    }),
-    // happypack处理样式--无cssModules模式，用来处理antd less
-    new HappyPack({
-      id: 'happyStyleNoModules',
-      loaders: [
-        {
-          loader: 'css-loader',
-          options: {},
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            postcssOptions: {
-              plugins: [['autoprefixer', {}]],
-            },
-          },
-        },
-        {
-          loader: 'less-loader',
-          options: {
-            javascriptEnabled: true,
-            lessOptions: {
-              paths: [resolve('../node_modules')],
-            },
-          },
-        },
-      ],
-      threadPool,
-      verbose: true,
-    }),
     // 提取css
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
@@ -236,44 +171,32 @@ const webpackConfigBase = {
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
-        antd: {
-          test: /[\\/]node_modules[\\/](antd)[\\/]/,
-          name: 'antd',
-          priority: 10,
-          enforce: true,
-          filename: 'chunks/[name].js',
-        },
-        coreJs: {
-          test: /[\\/]node_modules[\\/](core-js)[\\/]/,
-          name: 'coreJs',
-          priority: 9,
-          enforce: true,
-          filename: 'chunks/[name].js',
-        },
         rc: {
           test: /[\\/]node_modules[\\/](rc-.*)[\\/]/,
           name: 'rc',
           priority: 11,
-          enforce: true,
           filename: 'chunks/[name].js',
+          reuseExistingChunk: true,
+        },
+        antd: {
+          test: /[\\/]node_modules[\\/](antd)[\\/]/,
+          name: 'antd',
+          priority: 10,
+          filename: 'chunks/[name].js',
+          reuseExistingChunk: true,
+        },
+        coreJs: {
+          test: /[\\/]node_modules[\\/](core-js)[\\/]/,
+          name: 'coreJs',
+          priority: 11,
+          filename: 'chunks/[name].js',
+          reuseExistingChunk: true,
         },
         others: {
-          priority: 12,
-          test(mod) {
-            if (mod.resource) {
-              const include = [/[\\/]node_modules[\\/]/].every((reg) => {
-                return reg.test(mod.resource)
-              })
-              const exclude = [
-                /[\\/]node_modules[\\/](antd|core-js|rc-.*)[\\/]/,
-              ].some((reg) => {
-                return reg.test(mod.resource)
-              })
-              return include && !exclude
-            }
-            return false
-          },
+          priority: 9,
+          test: /[\\/]node_modules[\\/]/,
           name: 'others',
+          filename: 'chunks/[name].js',
         },
       },
     },
