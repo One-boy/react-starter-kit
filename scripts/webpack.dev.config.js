@@ -4,6 +4,7 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpackConfigBase = require('./webpack.base.config')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const { merge } = require('webpack-merge')
 const path = require('path')
 
@@ -14,11 +15,6 @@ const PORT = 8888
 
 const webpackConfigDev = {
   mode: 'development',
-  resolve: {
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-    },
-  },
   plugins: [
     // dll
     new webpack.DllReferencePlugin({
@@ -39,11 +35,12 @@ const webpackConfigDev = {
       ],
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin(),
   ],
   optimization: {
     moduleIds: 'named',
   },
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   devServer: {
     contentBase: resolve('../app'),
     historyApiFallback: false,

@@ -2,7 +2,7 @@
  * @Author: hy
  * @Date: 2019-05-05 17:47:14
  * @Last Modified by: huyu
- * @Last Modified time: 2021-04-13 18:12:57
+ * @Last Modified time: 2021-04-14 16:45:28
  */
 
 // 公共头部
@@ -30,6 +30,7 @@ class Header extends Component {
     Modal.confirm({
       title: '提示',
       content: '确认退出登录吗？',
+      centered: true,
       async onOk() {
         // 退出请求
         const reqData = {}

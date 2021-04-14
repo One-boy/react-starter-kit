@@ -1,8 +1,6 @@
-import { hot } from 'react-hot-loader/root'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ConfigProvider } from 'antd'
-
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 import moment from 'moment'
@@ -17,16 +15,13 @@ moment.locale('zh-cn')
 
 // 全局store初始值
 const store = {}
-const Routes = hot(() => (
-  <Router>
-    <Index />
-  </Router>
-))
 
 ReactDOM.render(
   <StoreProvider store={store}>
     <ConfigProvider locale={zh_CN}>
-      <Routes />
+      <Router>
+        <Index />
+      </Router>
     </ConfigProvider>
   </StoreProvider>,
   document.getElementById('root')

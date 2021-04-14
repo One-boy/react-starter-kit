@@ -40,7 +40,6 @@ const plugins = [
       style: true,
     },
   ],
-  ['react-hot-loader/babel'],
   [
     '@babel/plugin-transform-runtime',
     {

@@ -2,7 +2,7 @@
  * @Author: huyu
  * @Date: 2019-05-29 14:37:31
  * @Last Modified by: huyu
- * @Last Modified time: 2021-04-13 16:21:39
+ * @Last Modified time: 2021-04-14 15:50:33
  */
 
 // dll 配置
@@ -11,7 +11,7 @@ const webpack = require('webpack')
 
 module.exports = (env) => {
   const mode = env.development ? 'development' : 'production'
-  return {
+  const config = {
     mode: mode,
     resolve: {
       extensions: ['.js'],
@@ -36,4 +36,8 @@ module.exports = (env) => {
       }),
     ],
   }
+  if (env.development) {
+    config.devtool = 'eval-source-map'
+  }
+  return config
 }

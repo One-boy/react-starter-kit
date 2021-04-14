@@ -2,7 +2,7 @@
 
 ### 技术栈及环境
 
-- `react@17.0.x+webpack@5.x+antd@4.x+react-router-dom@5.x`
+- `react@17.x+webpack@5.x+antd@4.x+react-router-dom@5.x`
 - antd 使用`babel-plugin-import`按需加载
 - `node v14.3.0`
 - `npm v6.14.5`
@@ -109,3 +109,21 @@
   - `Prettier`
   - `CSS Modules`
   - `Beautify css/sass/scss/less`
+
+### 走过的坑
+
+- webpack4.x 升级到 webpack5.x
+
+  webpack-dev-server 无法使用热加载(hmr)问题
+
+  通过在 webpack.base.config.js 中加入`target:"web"`配置解决
+
+  详情：https://github.com/webpack/webpack-dev-server/issues/2758
+
+- 热加载功能更换包
+
+  之前是使用`react-hot-loader`+`@hot-loader/react-dom`配置使用热加载
+
+  现在换成了`react-refresh`启用热加载功能
+
+  换后打包遇到了`$RefreshReg$ is not defined`的错误，原因是`react-refresh`不需要再 production 环境使用，`webpack.base.config.js`区分下环境就行。详情：https://github.com/pmmmwh/react-refresh-webpack-plugin/issues/176

@@ -9,11 +9,21 @@ const HappyPack = require('happypack')
 const os = require('os')
 const threadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
+const isDevelopment = process.env.NODE_ENV !== 'production'
+let babelPlugins = []
+// 开发环境使用react-refresh启用热加载功能
+if (isDevelopment) {
+  babelPlugins = [require.resolve('react-refresh/babel')]
+}
+
 function resolve(p) {
   return path.join(__dirname, p)
 }
 
 const webpackConfigBase = {
+  // 解决webpack-cli 4.x中webpack-dev-server热加载无法使用的问题
+  // 详情：https://github.com/webpack/webpack-dev-server/issues/2758
+  target: 'web',
   entry: {
     app: [resolve('../app/client.js')],
   },
@@ -141,7 +151,15 @@ const webpackConfigBase = {
     // happypack处理js
     new HappyPack({
       id: 'happyBabel',
-      loaders: [{ loader: 'babel-loader', options: { cacheDirectory: true } }],
+      loaders: [
+        {
+          loader: require.resolve('babel-loader'),
+          options: {
+            cacheDirectory: true,
+            plugins: babelPlugins.filter(Boolean),
+          },
+        },
+      ],
       threadPool,
       verbose: true,
     }),
