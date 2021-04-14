@@ -14,7 +14,11 @@ import single from '@/pages/single'
 import worker from '@/pages/worker'
 
 // 动态导入
-const example1 = React.lazy(() => import('@/pages/list/example1'))
+const example1 = React.lazy(() =>
+  import(
+    /*webpackPrefetch:true*/ /*webpackChunkName:"example1"*/ '@/pages/list/example1'
+  )
+)
 
 export default class home extends Component {
   constructor(props) {
