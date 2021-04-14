@@ -51,7 +51,6 @@ const webpackConfigBase = {
         exclude: resolve('../node_modules'),
         use: [
           MiniCssExtractPlugin.loader,
-          //  'happypack/loader?id=happyStyle'
           {
             loader: 'css-loader',
             options: {
@@ -91,7 +90,6 @@ const webpackConfigBase = {
         include: resolve('../node_modules'),
         use: [
           MiniCssExtractPlugin.loader,
-          // 'happypack/loader?id=happyStyleNoModules',
           {
             loader: 'css-loader',
             options: {},
@@ -171,6 +169,20 @@ const webpackConfigBase = {
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
+        rcTable: {
+          test: /[\\/]node_modules[\\/](rc-table)[\\/]/,
+          name: 'rcTable',
+          priority: 12,
+          filename: 'chunks/[name].js',
+          reuseExistingChunk: true,
+        },
+        rcSelect: {
+          test: /[\\/]node_modules[\\/](rc-select)[\\/]/,
+          name: 'rcSelect',
+          priority: 12,
+          filename: 'chunks/[name].js',
+          reuseExistingChunk: true,
+        },
         rc: {
           test: /[\\/]node_modules[\\/](rc-.*)[\\/]/,
           name: 'rc',
