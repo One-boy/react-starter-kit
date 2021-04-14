@@ -19,8 +19,8 @@ const webpackConfigBase = {
   },
   output: {
     path: resolve('../dist'),
-    filename: '[name].[hash:4].js',
-    chunkFilename: 'chunks/[name].[hash:4].js',
+    filename: '[name].[contenthash:4].js',
+    chunkFilename: 'chunks/[name].[contenthash:4].js',
   },
   resolve: {
     extensions: ['.js'],
@@ -36,8 +36,8 @@ const webpackConfigBase = {
         use: {
           loader: 'worker-loader',
           options: {
-            filename: 'workers/file.[name].[hash:4].js',
-            chunkFilename: 'workers/chunk.[name].[hash:4].js',
+            filename: 'workers/file.[name].[contenthash:4].js',
+            chunkFilename: 'workers/chunk.[name].[contenthash:4].js',
           },
         },
       },
@@ -60,7 +60,7 @@ const webpackConfigBase = {
               modules: {
                 compileType: 'module',
                 auto: true,
-                localIdentName: '[path][name]__[local]--[hash:base64:5]', // 名字生成规则
+                localIdentName: '[path][name]__[local]--[contenthash:base64:5]', // 名字生成规则
               },
             },
           },
@@ -118,7 +118,7 @@ const webpackConfigBase = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'resource/iconfont/[hash:4].[ext]',
+              name: 'resource/iconfont/[contenthash:4].[ext]',
             },
           },
         ],
@@ -130,7 +130,7 @@ const webpackConfigBase = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'resource/image/[name].[hash:4].[ext]',
+              name: 'resource/image/[name].[contenthash:4].[ext]',
             },
           },
         ],
@@ -149,8 +149,8 @@ const webpackConfigBase = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: 'styles/file.[name]-[hash:4].css',
-      chunkFilename: 'styles/chunk.[name]-[hash:4].css',
+      filename: 'styles/file.[name]-[contenthash:4].css',
+      chunkFilename: 'styles/chunk.[name]-[contenthash:4].css',
     }),
     // 去掉moment语言包
     // 使用的时候，则需要引入中文包，
