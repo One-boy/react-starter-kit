@@ -2,23 +2,19 @@
  * @Author: huyu
  * @Date: 2019-06-07 17:26:38
  * @Last Modified by: huyu
- * @Last Modified time: 2021-04-13 15:31:15
+ * @Last Modified time: 2021-04-14 20:20:20
  */
 
 // 登录页测试
 
 import React from 'react'
-import Enzyme from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
 import { shallow, mount, render } from 'enzyme'
-// 引入polyfill，不然async await无法用，不知道为啥，babel-jest插件没起作用？
-// import '@babel/polyfill'
 import Login from './index'
-
-Enzyme.configure({ adapter: new Adapter() })
 
 describe('Login component test', () => {
   it('should have h2 title', () => {
+    // 下面会报错，目前（20210414）enzyme还不支持react17，需要等enzyme-adapter-react-17出来
+    // 不过可以使用非官方的：https://github.com/wojtekmaj/enzyme-adapter-react-17
     const wrapper = mount(<Login />)
     expect(wrapper.contains(<h2>登录</h2>)).toBe(true)
   })

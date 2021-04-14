@@ -2,7 +2,7 @@
  * @Author: hy
  * @Date: 2019-05-05 17:48:01
  * @Last Modified by: huyu
- * @Last Modified time: 2021-04-13 18:48:46
+ * @Last Modified time: 2021-04-14 20:00:19
  */
 
 // 登录
@@ -85,6 +85,6 @@ function Login(props) {
 }
 
 Login.propTypes = {
-  history: Proptypes.object.isRequired,
+  history: Proptypes.object,
 }
 export default Login

@@ -11,7 +11,7 @@ describe('Login', () => {
     await page.type('#username', 'admin')
     await page.type('#password', '')
     await page.click('button[type="submit"]')
-    await page.waitForSelector('.ant-form-explain') // should display error
+    await page.waitForSelector('.ant-form-item-explain-error') // should display error
   })
 
   it('should login successfully', async () => {
