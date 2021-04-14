@@ -47,9 +47,9 @@ const webpackConfigProd = {
       ],
     }),
     new CleanWebpackPlugin({
-      //打包前删除文件夹
-      cleanOnceBeforeBuildPatterns: [path.join(__dirname, '../dist')],
-      verbose: false, //是否报告已删除的文件
+      dry: false,
+      cleanOnceBeforeBuildPatterns: [resolve('../dist')],
+      verbose: true, //是否报告已删除的文件
     }),
     // 分析代码构成
     // new BundleAnalyzer({ analyzerPort: 3001 }),
