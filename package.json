@@ -11,7 +11,7 @@
     "createDll": "npm run createDllDev && npm run createDllPro",
     "test:js": "jest --colors --config=jest-js.config.js",
     "test:ui": "jest --config=jest-ui.config.js --runInBand",
-    "huskyInstall": "node ./node_modules/husky/lib/installer/bin.js install"
+    "huskyInstall": "husky install"
   },
   "repository": {
     "type": "git",
