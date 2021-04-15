@@ -100,13 +100,13 @@
     }
   },
   "lint-staged": {
-    "src/*.{js,jsx,mjs,ts,tsx}": [
-      "node_modules/.bin/prettier --write",
-      "node_modules/.bin/eslint --fix",
+    "app/**/*.{js,jsx,mjs,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix",
       "git add"
     ],
-    "src/*.{css,scss,less,json,html,md,markdown}": [
-      "node_modules/.bin/prettier --write",
+    "app/**/*.{css,scss,less,json,html,md,markdown}": [
+      "prettier --write",
       "git add"
     ]
   }

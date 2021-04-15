@@ -4,3 +4,4 @@ dist*
 chrome*
 .local-chromium*
 test_logs
+.husky

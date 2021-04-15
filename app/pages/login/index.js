@@ -2,7 +2,7 @@
  * @Author: hy
  * @Date: 2019-05-05 17:48:01
  * @Last Modified by: huyu
- * @Last Modified time: 2021-04-14 20:00:19
+ * @Last Modified time: 2021-04-15 11:21:14
  */
 
 // 登录
@@ -19,8 +19,9 @@ const FormItem = Form.Item
 
 function Login(props) {
   const [btnLoading, setBtnLoading] = useState(false)
+  // test no unused vars
   const [form] = Form.useForm()
-
+  console.log(form)
   const onFinish = async (values) => {
     console.log('Success:', values)
     const reqData = values
